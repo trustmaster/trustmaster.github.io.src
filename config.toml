@@ -1,0 +1,43 @@
+title = "A system brought to life"
+baseurl = "https://trustmaster.github.io/"
+canonifyurls = true
+paginate = 10
+theme = "startbootstrap-clean-blog"
+languageCode = "en-us"
+copyright = "© Vladimir Sibirov. Code released under the MIT license."
+# googleAnalytics = "UA-123-45" # delete or comment to disable Google Analytics JS generation
+# disqusShortname = "YourDisqusShortname" #delete or comment to disable Disqus comments
+
+[author]
+  name = "Vladimir Sibirov"
+
+[params]
+  DateForm = "Mon, Jan 2, 2006"
+  Description = "Tech blog on Software Architecture, Flow Based Programming, Software Development, Project Management and dealing with reality by Vladimir Sibirov"
+  Author = "Vladimir Sibirov"
+  # email = "trustmaster@kodigy.com" #Remove this line if you would prefer not to use an email button in the footer.
+  postSummariesFrontPage = 4 #Number of post summaries to show on front page, comment out to allow default(4)
+  showReadTime = true #set to false to exclude read time from header of post
+
+[[params.social]]
+  title = "twitter"
+  url = "https://twitter.com/sibiroff"
+[[params.social]]
+  title = "github"
+  url = "https://github.com/trustmaster"
+[[params.social]]
+  title = "facebook"
+  url = "https://www.facebook.com/trustmaster"
+
+[[menu.main]]
+  name = "Home"
+  url = "/"
+  weight = -200
+[[menu.main]]
+  name = "Archives"
+  url = "/post/"
+  weight = -180
+[[menu.main]]
+  name = "About"
+  url = "/about/author/"
+  weight = -160
