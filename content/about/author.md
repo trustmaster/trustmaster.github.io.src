@@ -42,7 +42,7 @@ This is how I joined [The Grid](https://thegrid.io) - a pioneer in AI-designed w
 
 Besides the scenes, I'm a family guy who loves his wife (she's on the photo above) and little daughter.
 
-I enjoy cooking, good food and good music (adjust the comma in this sentence to your taste). In winter my sport is skiing, in summer it's fun to ride a bicycle. Below there's a photo of my daughter looking to be not so pleased with it, but in fact she likes riding as much as I do :-)
+I enjoy cooking, good food and good music. In winter my sport is skiing, in summer it's fun to ride a bicycle. Below there's a photo of my daughter looking to be not so pleased with it, but in fact she likes riding as much as I do :-)
 
 ![Photo with bicycle and baby](/img/photo_onbike.jpg)
 
