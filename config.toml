@@ -5,7 +5,7 @@ paginate = 10
 theme = "startbootstrap-clean-blog"
 languageCode = "en-us"
 copyright = "© Vladimir Sibirov. Code released under the MIT license."
-# googleAnalytics = "UA-123-45" # delete or comment to disable Google Analytics JS generation
+googleAnalytics = "UA-92537342-1" # delete or comment to disable Google Analytics JS generation
 # disqusShortname = "YourDisqusShortname" #delete or comment to disable Disqus comments
 
 [author]
