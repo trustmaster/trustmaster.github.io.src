@@ -1,5 +1,5 @@
 title = "A system brought to life"
-baseurl = "https://trustmaster.github.io/"
+baseurl = "http://blog.kodigy.com/"
 canonifyurls = true
 paginate = 10
 theme = "startbootstrap-clean-blog"
