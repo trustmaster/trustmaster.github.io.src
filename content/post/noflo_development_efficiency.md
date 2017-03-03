@@ -11,7 +11,7 @@ tags = ["noflo","fbp","development"]
 
 # Development efficiency challenges in NoFlo
 
-Programming with NoFlo is getting more and more smooth with every release. However, if you maintaining a NoFlo application is your day-to-day job you may notice some inconveniences.
+Programming with NoFlo is getting more and more smooth with every release. However, if maintaining a NoFlo application is your day-to-day job you may notice some inconveniences.
 
 ## Defining new components is slow
 
