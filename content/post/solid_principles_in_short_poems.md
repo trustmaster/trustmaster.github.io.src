@@ -86,3 +86,16 @@ The original definition is:
 
 > If for each object o1 of type S there is an object o2 of type T such that for all programs P defined in terms of T, the behavior of P is unchanged when o1 is substituted for o2 then S is a subtype of T.
 
+This definition is cryptographically scientific, but the easier the example we need. Let's pick a slightly nostalgic one, with phone chargers and data cables.
+
+Not so long ago, a hardware designer who was developing, say, a new Nokia or Sony Ericsson cell phone, would fit it with a an A/C port, that a customer can plug a charger in. In the beginning, each model had its own type of charger. Then engineers (or was it marketing?) realized, that they can actually unify the chargers, so that they are _interchangeable_ for all the cell phones produced by the company. Your Nokia is running flat but your colleague has a Nokia too? You can borrow their charger, what can be more convenient:
+
+![Unified Nokia interfaces](/img/post/solid/lsp_example_1.svg)
+
+In this case your colleague's charger is the _substitute_ of the charger that you left at home. But then the principle got further: before you used a separate charger port and data cable port, but then some smart people came to use the same micro-USB for charging the phone and sending the data in and out. Just mounting the port on a device is not enough, the engineers had to ensure that all the peers would follow the same protocol, i.e. use the same _interface_. An absolutely wonderful consequence of following the LSP principle further this way was the fact, that now lots of phones of different brands could use the same chargers and the same data exchange software:
+
+Were there exceptions? Yes, for instance Apple devices kept using proprietary chargers. And even nowadays some devices, despite using the common micro-USB or USB-C ports, require brand-specific software instead of using the common protocols, giving us a good example of LSP violation. With violation of LSP comes the limitation of possible use cases, extensibility and convenience.
+
+Back to software engineering theory, the principle can be rephrased as:
+
+*Use interfaces to make the dependency components interchangeable.*
