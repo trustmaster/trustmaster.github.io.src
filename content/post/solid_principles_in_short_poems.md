@@ -2,7 +2,7 @@
 categories = ["Software Design"]
 comments = true
 date = "2017-11-25T16:33:45+01:00"
-description = "An opinionated summary of SOLID design principles, which common sense shortcuts, a grain of Zen and simple poetry"
+description = "An opinionated summary of SOLID design principles, with common sense shortcuts, a grain of salt, and simple poetry"
 draft = true
 image = "/img/post-bg.jpg"
 tags = ["design", "architecture", "patterns"]
@@ -72,3 +72,17 @@ For an electronics company this approach saves millions of dollars on engineerin
 Rephrasing the principle:
 
 *A component should be so simple that it rarely needs to be modified, but it should be easily extensible by other components.*
+
+# Liskov Substitution Principle (LSP)
+
+```
+A founder founded a foundation
+Of large software corporation.
+Foundation was so strong and hard,
+It found a founder's counterpart.
+```
+
+The original definition is:
+
+> If for each object o1 of type S there is an object o2 of type T such that for all programs P defined in terms of T, the behavior of P is unchanged when o1 is substituted for o2 then S is a subtype of T.
+
