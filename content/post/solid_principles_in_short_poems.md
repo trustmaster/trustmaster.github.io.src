@@ -109,3 +109,35 @@ Were there exceptions? Yes, for instance Apple devices kept using proprietary ch
 Back to software engineering theory, the principle can be rephrased as:
 
 *Use interfaces to make the dependency components interchangeable.*
+
+## Interface Segregation Principle (ISP)
+
+```
+Man proposed to a princess is no fool:
+He's given a horse and a kingdom to rule.
+But there's a dragon to slay,
+And an army to pay,
+While all he wants is a girl and a mule.
+```
+
+A quote from Uncle Bob's book can serve as a definition:
+
+> it is harmful to depend on modules that contain more than you need
+
+Although the name of this principle sounds somewhat chemistry, we can fall back to a simple example that you may have experienced in real life. Imagine that you just moved to a new home and you demand on broadband `Internet` access. There are several Internet Service Providers that can connect your apartment, but only one of them can do it right away while with the others you have to wait for several weeks.
+
+That provider though only offers ADSL `Internet` that comes with a `Landline` and a `MobileSIM` package, all paid on a monthly basis with a minimal contract of 2 years. You don't want to wait several weeks and decide that having a landline and a relatively cheap SIM is not such a bad thing. So, you sign the contract and start to depend on the following congregated interface:
+
+![Depending on a multi-purpose interface](/img/post/solid/isp_example_1.svg)
+
+_This diagram shows just a few of the functions that you start to depend as a daily routine, provided from an unsegregated <s>interface</s> Internet provider._
+
+After the first month you come to a conclusion that even though the ADSL is more or less OK, the calls on that SIM are pricey and you don't need the landline at all. Altogether you've signed to pay twice as much for the services that you don't need and there are way better deals on the market if you got a broadband and a SIM card separately:
+
+![Depending on almost segregated interfaces](/img/post/solid/isp_example_2.svg)
+
+In the latter case if the ADSL line goes nuts, you can change it for a better provider, without having to change your mobile SIMs as well.
+
+So, what this principle recommends us is:
+
+*Don't depend on things that you need and that you don't need altogether. It's better if they break separately rather than all at once.*
