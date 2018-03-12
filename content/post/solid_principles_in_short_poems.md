@@ -12,7 +12,7 @@ title = "SOLID design principles in short poems"
 
 Software Design is hard. It is complicated, it takes years to learn (in a sense that you really know what you are doing and why, compared to just copying and pasting something that you read somewhere) and sometimes it is counter-intuitive.
 
-I started making these notes to better understand SOLID design principles myself while reading the "Clean Architecture" by Robert C. Martin. The book points to common misunderstandings of these principles, but the explanations given are far from being easily memorable.
+I started making these notes to better understand SOLID design principles myself while reading the ["Clean Architecture" by Robert C. Martin](https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164). The book points to common misunderstandings of these principles, but the explanations given are far from being easily memorable.
 
 To make Software Design a bit more entertaining, I decided to write a short funny poem for each of the five SOLID principles, complemented with examples from real life that ideally even non-engineers can understand.
 
@@ -33,11 +33,15 @@ The difference is easy to illustrate with an example. Consider a software model 
 
 ![Example class diagram](/img/post/solid/srp_example.svg)
 
-So far so good: the `Printer` has only one method `print()` which does something relatively simple (i.e. just prints whatever it's sent). But there are three actors depending on it (no matter if they inherit it, call it directly or call it via shared `interface`). Thus, it violates SRP. Indeed, let's say that the `DesignDepartment` is doing well in graphical design and now they need a much better `Printer` to print full-color A0-sized posters on glossy paper. What do you do? Add another method `printA0()` or make the `print()` method print full-color A0s by default? `TechDepartment` is amused by the idea of using that printer to make wall-sized comics! But `FinanceDepartment` is angry, because the geeks would be wasting the ink, the time of everybody waiting in the printer queue, and of course company $$$s. Thus, the obvious solution is to have not 1 but 3 different Printers, each one fitted for the needs its actor.
+So far so good: the `Printer` has only one method `print()` which does something relatively simple (i.e. just prints whatever it's sent). But there are three actors depending on it (no matter if they inherit it, call it directly or call it via shared `interface`). Thus, it violates SRP. Indeed, let's say that the `DesignDepartment` is doing well in graphical design and now they need a much better `Printer` to print full-color A0-sized posters on glossy paper. What do you do? Add another method `printA0()` or make the `print()` method print full-color A0s by default? `TechDepartment` is amused by the idea of using that printer to make wall-sized comics! But `FinanceDepartment` is angry, because the geeks would be wasting the ink, the time of everybody waiting in the printer queue, and of course company $$$s. Thus, the obvious solution is to have not 1 but 3 different Printers, each one fitted for the needs its actor:
 
-That brings a temptation of explaining SRP as "Each class should have only one class dependent on it", but in reality this would mean tons of merely duplicated code. For instance, `FinanceDepartment` and `TechDepartment` could still use printers of the same cheap model, while `DesignDepartment` would be using its shiny `GraphicPrinter`. So, we end up with a diagram like this:
+![SRP in action](/img/post/solid/srp_example_2.svg)
 
-![Updated class diagram](/img/post/solid/srp_example_2.svg)
+That brings a temptation of explaining SRP as "Each class should have only one class dependent on it", but in reality this would mean tons of merely duplicated code:
+
+To deduplicate our effort we could make a reasonable violation to the SRP principle. For example, `FinanceDepartment` and `TechDepartment` could still use printers of the same cheap model, while `DesignDepartment` would be using its shiny `GraphicPrinter`:
+
+ ![Optimized printer diagram](/img/post/solid/srp_example_3.svg)
 
 In simple words, the SRP principle can be rephrased as:
 
@@ -57,7 +61,7 @@ The original definition reads as:
 
 > A software artifact should be open for extension but closed for modification.
 
-As an example, we'll use a famous electronics company which has been producing a very successful model of a `VacuumCleaner` for many years. Its `VacuumCleanerBase` has a powerful and reliable `Engine`, all its components have been perfectly fit together and proved over time. The time though keeps going by and the governments come up with energy consumption regulations, so the mighty but fixed `1800 Watt` characteristic is no longer an advantage. What does the company do? Invent a new model, spending lots of money for research, engineering, testing, etc.? Modify the internals of `VacuumCleanerBase` so that it is no longer well-fit and reliable? No, there's a better way. The old good `VacuumCleanerBase` can be extended using a simple `PowerInvertor` device that will allow a user to adjust the output wattage using a simple control knob or slider:
+As an example, we'll use a famous electronics company which has been producing a very successful model of a `VacuumCleaner` for many years. Its `VacuumCleanerBase` has a powerful and reliable `Engine`, all its components have been perfectly fit together and proved over time. The time though keeps going by and the governments come up with energy consumption regulations, so the mighty but fixed `1800 Watt` power characteristic is no longer an advantage. What does the company do? Invent a new model, spending lots of money for research, engineering, testing, etc.? Modify the internals of `VacuumCleanerBase` so that it is no longer well-fit and reliable? No, there's a better way. The old good `VacuumCleanerBase` can be extended using a simple `PowerInvertor` device that will allow a user to adjust the output wattage using a simple control knob or slider:
 
 ![Extended VacuumCleaner](/img/post/solid/ocp_example_1.svg)
 
@@ -110,6 +114,8 @@ Back to software engineering theory, the principle can be rephrased as:
 
 *Use interfaces to make the dependency components interchangeable.*
 
+<small>_Note: the original definition doesn't say anything about interfaces. It sounds more like using parent classes instead of child classes. That is so C++. This article targets slightly different languages and encourages using interfaces and aggregation over inheritance._</small>
+
 ## Interface Segregation Principle (ISP)
 
 ```
@@ -120,7 +126,7 @@ And an army to pay,
 While all he wants is a girl and a mule.
 ```
 
-A quote from Uncle Bob's book can serve as a definition:
+A quote from Robert Martin's book can serve as a definition:
 
 > it is harmful to depend on modules that contain more than you need
 
@@ -130,7 +136,7 @@ That provider though only offers ADSL `Internet` that comes with a `Landline` an
 
 ![Depending on a multi-purpose interface](/img/post/solid/isp_example_1.svg)
 
-_This diagram shows just a few of the functions that you start to depend as a daily routine, provided from an unsegregated <s>interface</s> Internet provider._
+_This diagram shows just a few of the functions that you start to depend on as a daily routine, provided from an unsegregated <s>interface</s> Internet provider._
 
 After the first month you come to a conclusion that even though the ADSL is more or less OK, the calls on that SIM are pricey and you don't need the landline at all. Altogether you've signed to pay twice as much for the services that you don't need and there are way better deals on the market if you got a broadband and a SIM card separately:
 
