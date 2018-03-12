@@ -7,7 +7,7 @@ draft = false
 
 # About the author
 
-![Photo with wife](/img/photo_together.jpg)
+![Photo with bike](/img/photo_with_bike.jpg)
 
 Hello world! My name is Vladimir and I'm a software engineer with a Master degree in Computer Science and background in Content Management Systems.
 
@@ -36,14 +36,14 @@ Meanwhile I continued to earn money as a freelance LAMP specialist and around 20
 
 I grew from a freelance contractor to a CTO in digital production industry, but then I realized that while I was mostly busy making the company run and grow smoothly, my technical expertise was becoming irrelevant. Something I thought too early to happen at the age of 25. So I left the advertisement market and went for a product company.
 
-This is how I joined [The Grid](https://thegrid.io) - a pioneer in AI-designed websites. For me it has been a rare opportunity to run Flow-based systems in production and be a part of bright international team.
+This is how I joined [The Grid](https://thegrid.io) - a pioneer in AI-designed websites. For me it was a rare opportunity to run Flow-based systems in production and be a part of bright international team.
+
+When my journey with The Grid was over, I moved to Berlin and started working for [HelloFresh](https://www.hellofresh.com/), one of the fastest growing companies in Europe.
 
 ## Offtopic
 
-Besides the scenes, I'm a family guy who loves his wife (she's on the photo above) and little daughter.
+Besides the scenes, I'm a family guy who loves his wife and little daughter.
 
-I enjoy cooking, good food and good music. In winter my sport is skiing, in summer it's fun to ride a bicycle. Below there's a photo of my daughter looking to be not so pleased with it, but in fact she likes riding as much as I do :-)
-
-![Photo with bicycle and baby](/img/photo_onbike.jpg)
+I enjoy cooking, good food and good music. In winter my sport is skiing, in summer it's fun to ride a bicycle.
 
 All cover photos on this website are also by my own, including the shot of my lovely cat on the cover of this page =(^.^)=
