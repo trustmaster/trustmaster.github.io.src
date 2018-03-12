@@ -2,7 +2,7 @@
 categories = ["Software Design"]
 comments = true
 date = "2017-11-25T16:33:45+01:00"
-description = "An opinionated summary of SOLID design principles, with common sense shortcuts and simple poetry"
+description = "An entertaining summary of SOLID design principles, with common sense shortcuts and simple poetry"
 draft = true
 image = "/img/post-bg.jpg"
 tags = ["design", "architecture", "patterns"]
@@ -10,11 +10,11 @@ title = "SOLID design principles in short poems"
 
 +++
 
-# SOLID design as poetry
+Software Design is hard. It is complicated, it takes years to learn (in a sense that you really know what you are doing and why, compared to just copying and pasting something that you read somewhere) and sometimes it is counter-intuitive.
 
-Disclaimer: I make these notes to better understand SOLID design principles myself while reading the "Clean Architecture" by Robert Martin. The book points to common misunderstandings of these principles, but the explanations given are far from being easily memorable.
+I started making these notes to better understand SOLID design principles myself while reading the "Clean Architecture" by Robert C. Martin. The book points to common misunderstandings of these principles, but the explanations given are far from being easily memorable.
 
-Here I'll try to make them easier to understand and memorize, with a bit of poetry, fun examples and a grain of salt.
+To make Software Design a bit more entertaining, I decided to write a short funny poem for each of the five SOLID principles, complemented with examples from real life that ideally even non-engineers can understand.
 
 ## Solid Responsibility Principle (SRP)
 
@@ -141,3 +141,42 @@ In the latter case if the ADSL line goes nuts, you can change it for a better pr
 So, what this principle recommends us is:
 
 *Don't depend on things that you need and that you don't need altogether. It's better if they break separately rather than all at once.*
+
+## Dependency Inversion Principle (DIP)
+
+```
+There lived a tail who waged a dog.
+It could not stay like that for long.
+They went to lawyer to conclude
+Their independent neighborhood.
+And now there's nothing left to nag:
+They both have documents to wag.
+```
+
+As stated by Robert C. Martin:
+
+> A. High-level modules should not depend on low-level modules. Both should depend on abstractions.
+
+> B. Abstractions should not depend on details. Details should depend on abstractions.
+
+This principle is the most difficult one to explain and illustrate to somebody who hasn't spent countless hours building software. Dependency what? Inversion how? For sake of who?
+
+But thinking of it, this principle is widely involved in how we learn and interact with the outer world: we interact with concrete objects via abstract interfaces. And these interfaces serve as protocols, that allow the dependency flow to be the inverse of the control flow, at least in the critical parts.
+
+For example, say that you need a plumber to fix a leak. Alright, you know your friend George is good at things and probably can do it for you. Just ask George then. But what if George is not around or he doesn't know how to fix a leaking tap in particular? Then you need an abstraction: a Plumber. And you need another abstraction to get you that Plumber in first place: some Household Service or even just Classifieds (both are just Abstract Factories in this case).
+
+Let's zoom in and generalize this example a little bit. So, consider we have a `Customer` who relies on plumber `George` entirely:
+
+![A very concrete dependency](/img/post/solid/dip_example_1.svg)
+
+It's good to know there's `George` to fix a leaky pipe. But what happens if `George` is not there when a `Customer` needs him? Or if the problem a `Customer` has later on requires skills or equipment `George` simply doesn't have. It's not so good for `George` either if the only way he gets customers is via direct reach. Thus, this direct dependency may be effective in short term but not flexible over time.
+
+With Dependency Inversion Principle applied, the diagram would look something like this:
+
+![DIP in action](/img/post/solid/dip_example_2.svg)
+
+In this case, a customer called `Bill` implements an abstract interface `Customer` and has abstract knowledge on how to get help from a generic `HouseholdService`, e.g. when he needs a `Plumber`. The interface `Plumber` represents what a `Customer` thinks a plumber should do. All the rest is behind the scenes: a double curved line also known as architectural boundary. For example, there can be a handy website `FindAPlumberDotCom` that helped `Bill` to find a plumber `George` within seconds without any hassle.
+
+So, where is the inversion? When `Bill` has a leaky pipe, he still calls `George` to fix it in the end - this is the control flow. But `Bill` doesn't depend on `George`, he depends on an abstract interface that `George` also depends on. A dependency from `George` to `Plumber` interface is inverse to the control flow. This is why the principle is called Dependency Inversion.
+
+Back in Software Engineering world, DIP means _applying abstractions to implement achitectural boundaries and make the dependency flow in the direction stated by the principle: from concrete details to stable abstractions_.
