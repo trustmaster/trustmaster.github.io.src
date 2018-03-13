@@ -1,7 +1,7 @@
 +++
 categories = ["Software Design"]
 comments = true
-date = "2017-11-25T16:33:45+01:00"
+date = "2018-03-12T22:33:45+01:00"
 description = "An entertaining summary of SOLID design principles, with common sense shortcuts and simple poetry"
 draft = true
 image = "/img/post-bg.jpg"
