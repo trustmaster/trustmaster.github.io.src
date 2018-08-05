@@ -12,7 +12,7 @@ categories = [
 image = "/img/post-bg.jpg"
 title = "The real case for Flow-based Programming"
 description = "The place for Flow-based Programming in Software Engineering and Architecture, and how to get it right there"
-draft = false
+draft = true
 comments = true
 date = "2018-08-05T17:30:12+02:00"
 +++
