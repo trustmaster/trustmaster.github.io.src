@@ -6,7 +6,7 @@ theme = "startbootstrap-clean-blog"
 languageCode = "en-us"
 copyright = "© Vladimir Sibirov. Code released under the MIT license."
 googleAnalytics = "UA-92537342-1" # delete or comment to disable Google Analytics JS generation
-# disqusShortname = "YourDisqusShortname" #delete or comment to disable Disqus comments
+disqusShortname = "kodigy-blog" #delete or comment to disable Disqus comments
 PygmentsCodeFences = true
 pygmentsstyle = "autumn"
 
