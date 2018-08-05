@@ -14,7 +14,7 @@ title = "The real case for Flow-based Programming"
 description = "The place for Flow-based Programming in Software Engineering and Architecture, and how to get it right there"
 draft = false
 comments = true
-date = "2018-05-04T17:30:12+01:00"
+date = "2018-08-05T17:30:12+02:00"
 +++
 
 Recently I have watched a lot of software engineers and software architects struggle in the wild. Trying to design good software, write good code, and make it evolve over time without turning into a Big Bowl of Spaghetti. And despite having ultimate methodologies like [DDD, Clean Architecture and others](https://herbertograca.com/2017/11/16/explicit-architecture-01-ddd-hexagonal-onion-clean-cqrs-how-i-put-it-all-together/), we still struggle a lot with software design and its consequences. [This talk](https://www.youtube.com/watch?v=GAFZcYlO5S0) by Simon Brown provides a good example of that.
