@@ -19,7 +19,7 @@ date = "2018-08-05T17:30:12+02:00"
 
 Recently I have watched a lot of software engineers and software architects struggle in the wild. Trying to design good software, write good code, and make it evolve over time without turning into a Big Bowl of Spaghetti. And despite having ultimate methodologies like [DDD, Clean Architecture and others](https://herbertograca.com/2017/11/16/explicit-architecture-01-ddd-hexagonal-onion-clean-cqrs-how-i-put-it-all-together/), we still struggle a lot with software design and its consequences. [This talk](https://www.youtube.com/watch?v=GAFZcYlO5S0) by Simon Brown provides a good example of that.
 
-Somewhere in a parallel universe of [Flow-based programming](https://en.wikipedia.org/wiki/Flow-based_programming) there are people who have a solution to the problem of software design evolution, but struggle making their ideas applicable and wide-spread among other engineers and companies.
+Somewhere in a parallel universe of [Flow-based programming](https://en.wikipedia.org/wiki/Flow-based_programming) there are people who know how to make software design over time together with code, but struggle making their ideas applicable and wide-spread among other engineers and companies.
 
 Being aware of both, here is what I have to say.
 
@@ -27,22 +27,23 @@ But first,
 
 ## What is Flow-based programming?
 
-[Flow-based Programming (FBP)](https://en.wikipedia.org/wiki/Flow-based_programming) is a combination of [Dataflow programming](http://en.wikipedia.org/wiki/Dataflow_programming) and [Component-based software engineering](http://en.wikipedia.org/wiki/Component-based_software_engineering) built around the notion of Components communicating by sending messages (Information Packets, IPs) through Connections. So, it makes a program look somewhat like this:
+[Flow-based Programming (FBP)](https://en.wikipedia.org/wiki/Flow-based_programming) is a combination of [Dataflow programming](http://en.wikipedia.org/wiki/Dataflow_programming) and [Component-based software engineering](http://en.wikipedia.org/wiki/Component-based_software_engineering) built around the idea of Components communicating via messages (Information Packets, IPs) sent through Connections. So, it makes a program look somewhat like this:
 
 ![NoFlo graph example](/img/post/noflo_app_example.png)
 
 What makes Flow-based Programming different from other approaches is:
 
- - Dataflow: it concentrates on how data flows through the system and what changes it experiences, rather than what command to execute in which case
- - 2 levels of implementation: Graph (usually visual) and Component (usually textual). Components written in a conventional programming language are wired together in a graph. Graphs can be nested, so you can "zoom" into a specific component and see it as a sub-graph.
- - Components run concurrently and share no state.
+ - Dataflow: it concentrates on how data flows through the system and what changes it experiences, rather than what command to execute in which case.
+ - 2 engineering perspectives/views: Graph (usually visual) and Component (usually textual). Components are written in conventional programming languages, and are wired together in a graph. Graphs can be nested, so you can "zoom" into a specific component and see it as a sub-graph.
+ - Components define their interface via incoming and outgoing Ports. This ports interface is all the outside world knows about the component technically.
+ - Components run concurrently and share no state. But inside each component can be stateful or stateless.
  - The messages (IPs) are more self-contained objects than just primitive values, which makes communication and synchronization more effective.
 
 If you are into studying FBP, I recommend you to start with the [Flowbased wiki](https://github.com/flowbased/flowbased.org/wiki).
 
 ## Where is it applicable?
 
-Flow-based programming applies most naturally to the domains which already have the notion of components, black boxes, processes, pipelines, etc. In particular, FBP is very attractive in:
+Flow-based programming applies most naturally to domains which already have the notion of components, black boxes, processes, pipelines, etc. In particular, FBP is very attractive in:
 
  - Bioinformatics
  - Data, e.g. ETL
@@ -54,7 +55,7 @@ But being a general-purpose programming paradigm, it is also being applied to ot
  - Business applications
  - Web services
 
-Although in the latter FBP practitioners either give up to implementing conventional software patterns on top of FBP, or go against the common thread of how clean software is built and reinvent all the fundamental principles on their own.
+Although in the latter FBP practitioners either give up to implementing conventional software patterns on top of FBP, or go against the common thread of how clean software is built and reinvent all the fundamental principles on their own. Worth noticing nevertheless, that [originally FBP was applied](http://www.jpaulmorrison.com/fbp/history.html) to transactional Banking software where it was used rather successfully for a good sequence of years.
 
 ## Problems it solves
 
@@ -62,19 +63,27 @@ Call it a programming paradigm, an architecture pattern, whatever. The real prob
 
 ### Comprehensibility of Software systems
 
-Humans understand diagrams quicker than hundreds lines of code. Most software projects start on a whiteboard. With FBP, they continue living on a whiteboard, so that at any point of time you can see different aspects of a software system as a diagram.
+Humans understand diagrams quicker than hundreds lines of code. Most software projects start on a whiteboard. With FBP, they continue living on a whiteboard, so that at any point of time you can see on a diagram how an application is structured and how it behaves.
 
 ### Evolution of Architecture vs. Code
 
-In conventional Software Design, diagrams get abandoned soon after the implementation starts. It's very hard to keep both diagrams and code up to date. In the opposite approach the diagrams are generated from code, so you can get actual diagrams at any time, but the resulting diagrams are complicated, because they are not 1st class citizens. With FBP, diagrams _are_ code. Problem solved.
+In conventional Software Design, diagrams get abandoned soon after the implementation starts. It's very hard to keep both diagrams and code up to date.
+
+In the opposite approach the diagrams are generated from code, so you can get actual diagrams at any time, but the resulting diagrams are complicated, because they are a side effect of the design process rather than its aim.
+
+With FBP, diagrams _are_ code. Problem solved.
 
 ### Granularity of Dataflow systems
 
-The problem of dataflow approach is that it often gets too granular at low level. There are too many details on the diagrams. With FPB, you write low level components in conventional textual programming languages, making that tool do its best job and hiding unnecessary detail under the hood.
+The problem of dataflow approach is that it often gets too granular and low level. There are too many details on the diagrams.
+
+With FPB, you write low level components in conventional textual programming languages, making that tool do its best job and hiding unnecessary detail under the hood.
 
 ### Isolation of Dataflow languages
 
-Some dataflow languages force you to implement everything either with the visual language itself, or with a low-level language that it is implemented in (e.g. C). With FBP you don't need to reinvent all the wheels, you just use existing libraries of your favorite language inside the components.
+Some dataflow languages force you to implement everything either with the visual language itself, or with a low-level language that it is implemented in (e.g. C).
+
+With FBP you don't need to reinvent all the wheels, you just use existing libraries of your favorite language inside the components. Cross-language and remote communication is encouraged by use of [FBP Protocol](https://flowbased.github.io/fbp-protocol/).
 
 ## Problems it does not solve
 
