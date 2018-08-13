@@ -127,14 +127,14 @@ Unfortunately we are not in a state when we can just throw all the UML and piles
 
 At the moment it's hard to start delivering working Flow-based software. It is primarily caused by two factors:
 
-1. There are not so many Flow-based runtimes around that can be used in the existing applications.[Usually FBP runtimes force you to start from scratch.
+1. There are not so many Flow-based runtimes around that can be used in the existing applications. Usually FBP runtimes force you to start from scratch.
 2. There is no convenient Graph editor. The existing ones are either too old-fashioned, or too complex all-in solutions.
 
 There are of course traditional factors like lack of standards, documentation, and examples. But these I believe to be secondary to the first two problems.
 
 #### Embeddable run-times
 
-FBP runtimes/libraries/frameworks should be easy to embed in existing projects. [NoFlo's asComponent](https://bergie.iki.fi/blog/ascomponent/) is a good example of such embedding feature.
+FBP runtimes/libraries/frameworks should be easy to embed in existing projects. [NoFlo's asCallback](https://noflojs.org/documentation/embedding/) is a good example of such embedding feature.
 
 Clean API, documentation, and examples are of undoubted importance. But programmers want to be able to start with what they already know and have.
 
@@ -142,11 +142,11 @@ Clean API, documentation, and examples are of undoubted importance. But programm
 
 Presently there are two biggest players in this market: [DrawFBP](https://github.com/jpaulm/drawfbp) and [Flowhub](https://flowhub.io/). And they are the very opposites of each other.
 
-DrawFBP is a very old Java app that uses its very own UI flows to create FBP diagrams. It also comes with a code generator feature which works best for the classic JavaFBP. But it doesn't support universal `.fbp` and `.json` graph notations and isn't very useful for anything than just sketching (hello, UML) if you use a runtime that is not explicitly supported by this tool.
+DrawFBP is a Java app that was started long ago. It uses very own UI flows to create FBP diagrams. It also comes with a code generator feature which works best for the classic JavaFBP. But it doesn't support universal `.fbp` or `.json` graph notations and isn't very useful for anything than just sketching (hello, UML) if you use a runtime that is not explicitly supported by this tool.
 
-Flowhub is an app that runs right in your browser, and it's an IDE which does everything: edits graphs and components, saves projects on GitHub, runs tests, talks to the runtime, introspects the running application. And it does so by making use of universal protocols and file formats. But despite all of these being amazing features and despite my affiliation with Flowhub, it's not what the majority of the Flow-based programming enthusiasts need.
+Flowhub is an app that runs right in your browser, and it's an IDE which does everything: edits graphs and components, saves projects on GitHub, runs tests, talks to the runtime, introspects the running application. And it does so by making use of universal protocols and file formats. But despite all of these being amazing features and despite my affiliation with Flowhub, it's not what the many of the Flow-based programming enthusiasts need.
 
-What we need is neither Blender nor Eclipse. What we need is more like SublimeText or Visual Studio Code these days. We want something that can edit `.fbp` and `.json` files in a visually appealing and intuitive way. And that's it for now, the rest can be done by firing up a command in CLI. We want to try things fast locally and see how they work/break. So if we had something that looks like Flowhub but edits local graph files, it would be just enough.
+What we need is neither Blender nor Eclipse. What we need is more like SublimeText or Visual Studio Code these days. We want something that can edit `.fbp` and `.json` files in a visually appealing and intuitive way. And that's it for now. The rest can be done by firing up a command in CLI. We want to try things fast locally and see how they work/break. So if we had something that looks like Flowhub but edits local graph files, it would be just enough.
 
 ### Discovering best design practices
 
@@ -161,7 +161,7 @@ The second obvious answer is find patterns that work. Which means writing tons o
 1. How to structure Flow-based projects so that they are easy to navigate and change. The traditional problem of layers, packages, and naming convention.
 2. How to make Components extensible. Unfortunately, FBP has no analogue of neither inheritance (so, none of the OOP tricks with interfaces work) nor plug-ins (you can theoretically connect other components to extend behavior, but in practice it is very complicated and barely reusable).
 
-Both questions are worth a full-time research, so I leave them open for now.
+The first question speaks for itself and takes completing a few big projects to start recognizing a pattern. The second can be explained further here.
 
 ## The purpose of this document
 
