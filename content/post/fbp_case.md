@@ -126,14 +126,13 @@ But that, at least nowadays, forces you to write many components specific to you
 
 Yes, e.g.
 
- - With Java: [JavaFBP](https://github.com/jpaulm/javafbp) + [DrawFBP](https://github.com/jpaulm/drawfbp)
- - With JavaScript: [NoFlo](https://noflojs.org/) + [Flowhub](https://flowhub.io/)
- - With Go: [GoFlow](https://github.com/trustmaster/goflow), [Flowbase](https://github.com/flowbase/flowbase), [Cascades](https://github.com/cascades-fbp/cascades)
- - With Rust: [Fractalide](https://github.com/fractalide/fractalide)
- - With Python: [multiple packages](https://wiki.python.org/moin/FlowBasedProgramming)
+ - with Java: [JavaFBP](https://github.com/jpaulm/javafbp) + [DrawFBP](https://github.com/jpaulm/drawfbp)
+ - with JavaScript: [NoFlo](https://noflojs.org/) + [Flowhub](https://flowhub.io/)
+ - with Go: [GoFlow](https://github.com/trustmaster/goflow), [Flowbase](https://github.com/flowbase/flowbase), [Cascades](https://github.com/cascades-fbp/cascades)
+ - with Rust: [Fractalide](https://github.com/fractalide/fractalide)
+ - with Python: [multiple packages](https://wiki.python.org/moin/FlowBasedProgramming)
  - probably with your other favorite language, Google knows how many Flow-based Programming runtimes are around.
 
+ Will it be easy? Maybe yes, but probably not. Unfortunately we are not in a state when we can just throw all the UML and piles of classes away and switch to Graphs and Components all of a sudden. There are some important problems to be solved first. In particular, the learning curve may be steep both because of the paradigm shift and because of maturity of existing tools.
 
- Will it be easy? Maybe yes, but probably not. Learning curve may be steep both because of the paradigm shift and because of maturity of existing tools.
-
-My next article will be addressing the next milestones that we need to reach to make FBP usable for everyone.
+I'll follow up with an article addressing the next milestones that we need to reach to make FBP usable for everyone.
