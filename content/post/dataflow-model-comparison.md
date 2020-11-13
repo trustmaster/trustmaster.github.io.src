@@ -1,7 +1,7 @@
 +++
 image = "/img/post-bg.jpg"
-categories = ["Flow-based Programming","Computer Science"]
-tags = ["fbp","dataflow","development"]
+categories = ["Flow-based Programming"]
+tags = ["fbp"]
 date = "2012-06-03T15:56:29+01:00"
 title = "Comparison of dataflow models"
 comments = false

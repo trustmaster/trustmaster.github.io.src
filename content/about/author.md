@@ -1,8 +1,8 @@
 +++
+image = "/img/about-bg.jpg"
 date = "2018-03-12T22:24:47+01:00"
 title = "About"
 draft = false
-
 +++
 
 # About the author

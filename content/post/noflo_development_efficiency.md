@@ -5,7 +5,7 @@ comments = true
 draft = false
 description = "Obstacles on the way to happy day-to-day life with NoFlo and ways to overcome them"
 image = "/img/post-bg.jpg"
-categories = ["NoFlo","Flow-based programming"]
+categories = ["Flow-based Programming"]
 tags = ["noflo","fbp","development"]
 +++
 

@@ -6,7 +6,7 @@ description = "A few thoughts on design of NoFlo backends frequently talking to 
 image = "/img/post-bg.jpg"
 date = "2016-07-27T14:25:04+01:00"
 title = "On NoFlo database applications"
-categories = ["Flow-based Programming","NoFlo"]
+categories = ["Flow-based Programming"]
 +++
 
 # On NoFlo Database Applications

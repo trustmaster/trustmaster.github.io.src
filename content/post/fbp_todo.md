@@ -5,10 +5,7 @@ tags = [
     "design",
     "architecture",
 ]
-categories = [
-    "Flow-based Programming",
-    "Software Design",
-]
+categories = [ "Flow-based Programming" ]
 image = "/img/post-bg.jpg"
 title = "Flow-based Programming: TODO"
 description = "What we should do next for FBP to proliferate"

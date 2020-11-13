@@ -1,14 +1,9 @@
 +++
 tags = [
     "fbp",
-    "dataflow",
-    "design",
     "architecture",
 ]
-categories = [
-    "Flow-based Programming",
-    "Software Design",
-]
+categories = [ "Flow-based Programming" ]
 image = "/img/post-bg.jpg"
 title = "The real case for Flow-based Programming"
 description = "The place for Flow-based Programming in Software Engineering and Architecture"

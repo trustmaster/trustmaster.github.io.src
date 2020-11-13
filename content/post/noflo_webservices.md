@@ -6,7 +6,7 @@ comments = true
 draft = false
 description = "Some problems that occur when trying to run entire web services as NoFlo graphs and some (radical) ways to solve them"
 image = "/img/post-bg.jpg"
-categories = ["NoFlo","Flow-based Programming"]
+categories = ["Flow-based Programming"]
 
 +++
 

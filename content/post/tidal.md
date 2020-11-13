@@ -1,5 +1,5 @@
 +++
-categories = ["Music"]
+categories = ["Personal"]
 comments = true
 date = "2018-03-26T22:08:44+02:00"
 description = "How after all the Free Music movement I ended up paying stacks of gold to a mainstream rap star and defending a very proprietary audio codec"

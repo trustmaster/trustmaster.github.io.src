@@ -1,35 +1,46 @@
 title = "A system brought to life"
 baseurl = "http://blog.kodigy.com/"
 canonifyurls = true
-paginate = 10
-theme = "startbootstrap-clean-blog"
+paginate = 6
+theme = "hugo-themes-cleanwhite"
 languageCode = "en-us"
 copyright = "© Vladimir Sibirov. Code released under the MIT license."
 googleAnalytics = "UA-92537342-1" # delete or comment to disable Google Analytics JS generation
-disqusShortname = "kodigy-blog" #delete or comment to disable Disqus comments
-PygmentsCodeFences = true
-pygmentsstyle = "autumn"
-
-[author]
-  name = "Vladimir Sibirov"
+# disqusShortname = "kodigy-blog" #delete or comment to disable Disqus comments
+# PygmentsCodeFences = true
+# pygmentsstyle = "autumn"
 
 [params]
-  DateForm = "Mon, Jan 2, 2006"
+  DateForm = "Jan 2, 2006"
   Description = "Tech blog on Software Architecture, Flow Based Programming, Software Development, Project Management and dealing with reality by Vladimir Sibirov"
   Author = "Vladimir Sibirov"
-  # email = "trustmaster@kodigy.com" #Remove this line if you would prefer not to use an email button in the footer.
   postSummariesFrontPage = 6 #Number of post summaries to show on front page, comment out to allow default(4)
   showReadTime = true #set to false to exclude read time from header of post
+  header_image = "img/home-bg.jpg"
 
-[[params.social]]
-  title = "twitter"
-  url = "https://twitter.com/sibiroff"
-[[params.social]]
-  title = "github"
-  url = "https://github.com/trustmaster"
-[[params.social]]
-  title = "facebook"
-  url = "https://www.facebook.com/trustmaster"
+  # Sidebar settings
+  about_me = true
+  sidebar_about_description = "Tech lead, teamwork amplifier, flow-based programming ambassador"
+  sidebar_avatar = "/img/avatar.jpg"      # use absolute URL, seeing it's used in both `/` and `/about/`
+
+  featured_tags = true 
+  featured_condition_size = 1 
+
+  [params.social]
+  rss            = true 
+  # email          = "youremail@gmail.com"
+  # facebook      = "full profile url in facebook"
+  # googleplus    = "full profile url in googleplus"
+  twitter        = "https://twitter.com/sibiroff"
+  linkedin       = "https://www.linkedin.com/in/sibirov"
+  # stackoverflow  = "https://stackoverflow.com/users/yourstackoverflowid"
+  # instagram     = "full profile url in instagram"
+  github         = "https://github.com/trustmaster"
+  # medium         = "full profile url in medium"
+
+  [[params.addtional_menus]]
+  title =  "About"
+  href =  "/about/author/"
 
 [[menu.main]]
   name = "Home"
@@ -43,3 +54,4 @@ pygmentsstyle = "autumn"
   name = "About"
   url = "/about/author/"
   weight = -160
+

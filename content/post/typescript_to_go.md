@@ -5,7 +5,7 @@ date = "2017-07-26T14:48:53+03:00"
 description = "Taking the best of the 2 worlds: rapidness of development with dynamic languages and reliability of static languages with TypeScript. Contains some Go inspiration"
 draft = false
 image = "/img/post-bg.jpg"
-tags = ["js","typescript","development"]
+tags = ["development"]
 title = "TypeScript: JavaScript way to Go"
 
 +++

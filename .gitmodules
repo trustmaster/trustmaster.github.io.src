@@ -2,3 +2,8 @@
 	path = public
 	url = git@github.com:trustmaster/trustmaster.github.io.git
 	branch = master
+
+[submodule "startbootstrap-clean-blog"]
+  path = themes/startbootstrap-clean-blog
+  url = git@github.com:humboldtux/startbootstrap-clean-blog.git
+  branch = master

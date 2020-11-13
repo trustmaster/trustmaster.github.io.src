@@ -1,6 +1,6 @@
 +++
 image = "/img/post-bg.jpg"
-categories = ["NoFlo","Flow-based programming"]
+categories = ["Flow-based Programming"]
 tags = ["noflo","fbp","development"]
 date = "2017-03-13T18:25:04+03:00"
 title = "Forcing a specific NoFlo version for all dependencies"

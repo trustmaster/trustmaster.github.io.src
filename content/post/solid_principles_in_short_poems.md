@@ -5,7 +5,7 @@ date = "2018-03-12T22:33:45+01:00"
 description = "An entertaining summary of SOLID design principles, with common sense shortcuts and simple poetry"
 draft = false
 image = "/img/post-bg.jpg"
-tags = ["design", "architecture", "patterns"]
+tags = ["architecture"]
 title = "SOLID design principles in short poems"
 
 +++
