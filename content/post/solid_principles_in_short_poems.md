@@ -1,14 +1,13 @@
-+++
-categories = ["Software Design"]
-comments = true
-date = "2018-03-12T22:33:45+01:00"
-description = "An entertaining summary of SOLID design principles, with common sense shortcuts and simple poetry"
-draft = false
-image = "/img/post-bg.jpg"
-tags = ["architecture"]
-title = "SOLID design principles in short poems"
-
-+++
+---
+categories: ["Development"]
+comments: true
+date: "2018-03-12T22:33:45+01:00"
+description: "An entertaining summary of SOLID design principles, with common sense shortcuts and simple poetry"
+draft: false
+image: "/img/post-bg.jpg"
+tags: ["architecture"]
+title: "SOLID design principles in short poems"
+---
 
 Software Design is hard. It is complicated, it takes years to learn (in a sense that you really know what you are doing and why, compared to just copying and pasting something that you read somewhere) and sometimes it is counter-intuitive.
 
@@ -77,7 +76,7 @@ Rephrasing the principle:
 
 *A component should be so simple that it rarely needs to be modified, but it should be easily extensible by other components.*
 
-# Liskov Substitution Principle (LSP)
+## Liskov Substitution Principle (LSP)
 
 ```
 A founder founded a foundation

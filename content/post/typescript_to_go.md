@@ -1,16 +1,13 @@
-+++
-categories = ["Development"]
-comments = true
-date = "2017-07-26T14:48:53+03:00"
-description = "Taking the best of the 2 worlds: rapidness of development with dynamic languages and reliability of static languages with TypeScript. Contains some Go inspiration"
-draft = false
-image = "/img/post-bg.jpg"
-tags = ["development"]
-title = "TypeScript: JavaScript way to Go"
-
-+++
-
-# TypeScript: JavaScript way to Go
+---
+categories: ["Development"]
+comments: true
+date: "2017-07-26T14:48:53+03:00"
+description: "Taking the best of the 2 worlds: rapidness of development with dynamic languages and reliability of static languages with TypeScript. Contains some Go inspiration"
+draft: false
+image: "/img/post-bg.jpg"
+tags: ["development"]
+title: "TypeScript: JavaScript way to Go"
+---
 
 My journey at [The Grid](https://thegrid.io) was over and I had 3 months before the start of a new contract, so I took an opportunity to fill a position of an interim CTO at [Dater.com](https://dater.com), a new dating app that is going to change the industry by moving from "post & search" approach to online & offline game-alike activity.
 
