@@ -13,3 +13,11 @@
 .table-of-contents a {
     font-size: 18px;
 }
+
+.img-container {
+  width: 100%;
+}
+
+.box {
+  margin: 0 auto;
+}
