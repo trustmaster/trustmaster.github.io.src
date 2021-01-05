@@ -1,8 +1,8 @@
 ---
 title: "Google Keep framework for TODO and Goal tracking"
 description: "How I use Google Keep for getting things done and tracking long-term goals, in addition to note taking. Plus collecting statistics and automating routine."
-date: 2020-12-25T12:40:39+01:00
-draft: true
+date: 2021-01-05T22:40:39+01:00
+draft: false
 image: "/img/post/google-keep-todo/bg.jpg"
 thumbnail: "/img/post/google-keep-todo/thumb.jpg"
 categories: ["Productivity"]
