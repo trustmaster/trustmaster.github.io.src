@@ -9,7 +9,11 @@
 
     {{ if .Params.image }}
     <meta property="og:image" content="{{ .Site.BaseURL }}{{ .Params.image }}">
+    {{ if .Params.thumbnail }}
+    <meta property="twitter:image" content="{{ .Site.BaseURL }}/{{ .Params.thumbnail }}" />
+    {{ else }}
     <meta property="twitter:image" content="{{ .Site.BaseURL }}{{ .Params.image }}" />
+    {{ end }}
     {{ else }}
     <meta property="og:image" content="{{ .Site.BaseURL }}/{{ .Site.Params.header_image }}">
     <meta property="twitter:image" content="{{ .Site.BaseURL }}/{{ .Site.Params.header_image }}" />
