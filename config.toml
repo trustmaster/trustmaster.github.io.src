@@ -1,5 +1,5 @@
 title = "A system brought to life"
-baseurl = "http://blog.kodigy.com/"
+baseurl = "https://blog.kodigy.com/"
 canonifyurls = true
 paginate = 6
 theme = "hugo-themes-cleanwhite"
