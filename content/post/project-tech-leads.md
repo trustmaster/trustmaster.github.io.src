@@ -10,7 +10,7 @@ draft: false
 
 _Any Engineer in the team can lead a project. Any project should have a technical lead._
 
-> **This article is a part of [Engineering Manager's Runbook](https://github.com/trustmaster/engineering-manager-runbook). Please visit the project on GitHub for more content about Engineering Management, star the repository to support the project, or start watching it for updates.**
+> **This article is part of [Engineering Manager's Runbook](https://github.com/trustmaster/engineering-manager-runbook). Please visit the project on GitHub for more content about Engineering Management, star the repository to support the project, or start watching it for updates.**
 
 ## Infographics
 
@@ -159,3 +159,5 @@ Another positive effect of applying this technique is that all the Project Leads
 
 1. [An Engineering Team where Everyone is a Leader](https://blog.pragmaticengineer.com/a-team-where-everyone-is-a-leader/) by [Gergely Orosz](https://blog.pragmaticengineer.com/).
 2. Turn the Ship Around! by L. David Marquet.
+
+> **This article is part of [Engineering Manager's Runbook](https://github.com/trustmaster/engineering-manager-runbook). Please visit the project on GitHub for more content about Engineering Management, star the repository to support the project, or start watching it for updates.**
