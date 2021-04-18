@@ -5,7 +5,7 @@ date: 2021-04-18T17:29:14+02:00
 categories: ["Management"]
 image: "/img/post-bg.jpg"
 thumbnail: "/img/post/project-leads-thumb.jpg"
-draft: true
+draft: false
 ---
 
 _Any Engineer in the team can lead a project. Any project should have a technical lead._
