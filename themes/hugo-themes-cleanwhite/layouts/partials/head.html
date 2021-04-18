@@ -8,10 +8,11 @@
     <meta property="og:type" content="article">
 
     {{ if .Params.image }}
-    <meta property="og:image" content="{{ .Site.BaseURL }}{{ .Params.image }}">
     {{ if .Params.thumbnail }}
+    <meta property="og:image" content="{{ .Site.BaseURL }}/{{ .Params.thumbnail }}">
     <meta property="twitter:image" content="{{ .Site.BaseURL }}/{{ .Params.thumbnail }}" />
     {{ else }}
+    <meta property="og:image" content="{{ .Site.BaseURL }}{{ .Params.image }}">
     <meta property="twitter:image" content="{{ .Site.BaseURL }}{{ .Params.image }}" />
     {{ end }}
     {{ else }}
