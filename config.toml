@@ -13,7 +13,7 @@ googleAnalytics = "UA-92537342-1" # delete or comment to disable Google Analytic
 [params]
   custom_css = ["css/custom.css"]
   DateForm = "Jan 2, 2006"
-  Description = "Tech blog on Software Architecture, Flow Based Programming, Software Development, Project Management and dealing with reality by Vladimir Sibirov"
+  Description = "Vladimir Sibirov on building software systems and engineering teams"
   Author = "Vladimir Sibirov"
   postSummariesFrontPage = 6 #Number of post summaries to show on front page, comment out to allow default(4)
   showReadTime = true #set to false to exclude read time from header of post
@@ -21,7 +21,7 @@ googleAnalytics = "UA-92537342-1" # delete or comment to disable Google Analytic
 
   # Sidebar settings
   about_me = true
-  sidebar_about_description = "Tech lead, teamwork amplifier, flow-based programming ambassador"
+  sidebar_about_description = "I'm a tech lead, teamwork amplifier, and flow-based programming ambassador"
   sidebar_avatar = "/img/avatar.jpg"      # use absolute URL, seeing it's used in both `/` and `/about/`
 
   featured_tags = true 
