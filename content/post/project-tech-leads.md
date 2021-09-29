@@ -6,6 +6,7 @@ categories: ["Management"]
 image: "/img/post-bg.jpg"
 thumbnail: "/img/post/project-leads-thumb.jpg"
 draft: false
+tags: ["management", "leadership"]
 ---
 
 _Any Engineer in the team can lead a project. Any project should have a technical lead._
