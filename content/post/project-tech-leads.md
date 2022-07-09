@@ -11,8 +11,6 @@ tags: ["management", "leadership"]
 
 _Any Engineer in the team can lead a project. Any project should have a technical lead._
 
-> **This article is part of [Engineering Manager's Runbook](https://github.com/trustmaster/engineering-manager-runbook). Please visit the project on GitHub for more content about Engineering Management, star the repository to support the project, or start watching it for updates.**
-
 ## Infographics
 
 ![Infographics](/img/post/project-leads.png)
@@ -159,6 +157,7 @@ Another positive effect of applying this technique is that all the Project Leads
 ## References
 
 1. [An Engineering Team where Everyone is a Leader](https://blog.pragmaticengineer.com/a-team-where-everyone-is-a-leader/) by [Gergely Orosz](https://blog.pragmaticengineer.com/).
-2. Turn the Ship Around! by L. David Marquet.
+2. [The Role of the Tech Lead](https://blog.get-merit.com/the-role-of-the-tech-lead/) by Rachel Spurrier @ [Merit](https://www.get-merit.com/) - _an Engineer's look at the Tech Lead role_.
+3. Turn the Ship Around! by L. David Marquet.
 
 > **This article is part of [Engineering Manager's Runbook](https://github.com/trustmaster/engineering-manager-runbook). Please visit the project on GitHub for more content about Engineering Management, star the repository to support the project, or start watching it for updates.**
