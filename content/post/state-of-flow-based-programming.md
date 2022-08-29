@@ -48,6 +48,27 @@ Data flows through connections from one process to the other. A connection may h
 
 What are those boxes with orange and green arrows on the left and right of the graph? Those are its input and output ports. Because a graph is also a component and can be connected to the outer world by the means of its input and output ports. E.g. sending an initial config to the input port could be an entry point to your application.
 
+There is also a textual Domain-specific language (DSL) for Flow-based Programming (FBP) which is actively used to save diagrams on disk or create diagrams when visual tools are not available or convenient. Below is an example of an `.fbp` diagram of an application that reads lines from a file, filters them by some criteria, and prints matching lines in console:
+
+```fbp
+INPORT=ReadFile.NAME:IN        # Input port
+OUTPORT=DisplayLines.OUT:OUT   # Output port
+
+ReadFile(io/ReadLine) -> Filter(app/StartsWith) ACC -> DisplayLines(cli/Printer)  # Main flow
+Filter REJ -> IN Reject(Drop) # Using custom port names
+```
+
+Here are the main building blocks of an `.fbp` file:
+
+- `INPORT=` starts a declaration of an input port. It maps the port `NAME` of the `ReadFile` process to the port `IN` of the graph itself.
+- `OUTPORT=` is a declaration of an output port of the graph. In this case the port `OUT` of the `DisplayLines` is mapped to the `OUT` of the graph.
+- `ReadFile(io/ReadLine)` says that a process `ReadFile` is an instance of `io/ReadLine` component. If you don't see port names before or after the process default port names (`IN` and `OUT`) are assumed.
+- Line #4 defines the entire main flow of the graph in one go. It instantiates the processes and connects them into a single pipeline using default port names. `ACC` is one of the output ports of `Filter` which means "accepted".
+- `Filter REJ` uses a process that is already defined, no need to specify component in parenthesis. `REJ` stands for output port named `REJ` ("rejected").
+- Line #5 defines the flow that drops rejected packets.
+
+You can find a visual representation of this graph in the [Strive for convenient IDE](#the-strive-for-a-convenient-ide) section.
+
 Each node on the graph can actually be a graph itself, also known as a *Subgraph*. A subgraph looks just like any other graph, and there is no limit in how many levels deep your application can be. This nesting concept of Flow-based Programming is very powerful, because it helps keeping perceived complexity at a moderate level. Here is an example of how it could work for an application that receives data via some external interface, runs some business logic, and exposes the result via a message broker:
 
 - _Application.fbp_ would be your top level graph which contains a super high level outline of your application's structure. At this level you see what the application does roughly and what subsystems it consists of, but all of them are subgraphs defined in their own diagrams.
