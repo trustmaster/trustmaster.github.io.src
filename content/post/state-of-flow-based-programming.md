@@ -4,7 +4,7 @@ tags: [
     "architecture",
 ]
 categories: [ "Flow-based Programming" ]
-image: "/img/post-bg.jpg"
+image: "/img/post/fbp/flowhub_bg.jpg"
 thumbnail: "img/post/fbp/flowhub_thumb.jpg"
 title: "The state of Flow-based Programming"
 description: "Where Flow-based Programming stands after 50 years since its introduction. What problems it solves today. And what problems it can solve tomorrow for broader Software Engineering industry"
@@ -12,8 +12,6 @@ draft: false
 comments: true
 date: "2022-08-28T17:30:12+02:00"
 ---
-
-![Example project open in Flowhub](/img/post/fbp/flowhub_thumb.jpg)
 
 > In memory of [J. Paul Morrison](https://jpaulm.github.io/index.html). May he rest in peace, and his work continue to live.
 
