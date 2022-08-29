@@ -13,9 +13,9 @@ comments: true
 date: "2022-08-28T17:30:12+02:00"
 ---
 
-> In memory of [J. Paul Morrison](https://jpaulm.github.io/index.html). May he rest in peace, and his work continue to live.
-
 ![Example project open in Flowhub](/img/post/fbp/flowhub_thumb.jpg)
+
+> In memory of [J. Paul Morrison](https://jpaulm.github.io/index.html). May he rest in peace, and his work continue to live.
 
 I started this article in 2018 as a collection of observations and ideas that I wanted to share with the Flow-based Programming community. It didn't go beyond a quick draft that never got published. During the next 4 years I barely thought about Flow-based Programming. My focus was on figuring out how software is built in large companies. Interestingly, some of the observations I found in the enterprise software development overlapped with the use cases that I had drafted in this article. So I decided to give it another try and address it not only to the FBP enthusiasts but also to people who are not familiar with FBP yet and might benefit from it.
 
