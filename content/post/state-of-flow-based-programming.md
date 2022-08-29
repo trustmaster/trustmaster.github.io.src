@@ -5,6 +5,7 @@ tags: [
 ]
 categories: [ "Flow-based Programming" ]
 image: "/img/post-bg.jpg"
+thumbnail: "img/post/fbp/flowhub_thumb.jpg"
 title: "The state of Flow-based Programming"
 description: "Where Flow-based Programming stands after 50 years since its introduction. What problems it solves today. And what problems it can solve tomorrow for broader Software Engineering industry"
 draft: false
