@@ -15,6 +15,8 @@ date: "2022-08-28T17:30:12+02:00"
 
 > In memory of [J. Paul Morrison](https://jpaulm.github.io/index.html). May he rest in peace, and his work continue to live.
 
+![Example project open in Flowhub](/img/post/fbp/flowhub_thumb.jpg)
+
 I started this article in 2018 as a collection of observations and ideas that I wanted to share with the Flow-based Programming community. It didn't go beyond a quick draft that never got published. During the next 4 years I barely thought about Flow-based Programming. My focus was on figuring out how software is built in large companies. Interestingly, some of the observations I found in the enterprise software development overlapped with the use cases that I had drafted in this article. So I decided to give it another try and address it not only to the FBP enthusiasts but also to people who are not familiar with FBP yet and might benefit from it.
 
 I kept postponing this work forever. Up until this Summer when I found out that J. Paul Morrison, the creator of Flow-based Programming, passed away this June at the age of 85. For me that's a personal loss which shook me deeply. On one hand, because of the gratitude that I feel to Paul (aka JPM) for inventing this concept some 50 years ago and sharing it with the rest of the world. On the other hand, because I knew Paul personally, and I know how much effort he was putting recently into making FBP more attractive to the new generations of programmers. We even collaborated on a few projects to support FBP adoption, but sadly all that work was just a drop in the ocean.
