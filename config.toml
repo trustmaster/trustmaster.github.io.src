@@ -38,6 +38,7 @@ googleAnalytics = "UA-92537342-1" # delete or comment to disable Google Analytic
   # instagram     = "full profile url in instagram"
   github         = "https://github.com/trustmaster"
   # medium         = "full profile url in medium"
+  telegram = "https://t.me/OctomatioBot?start=YmxvZy5rb2RpZ3kuY29tL2luZGV4LnhtbA"
 
   [[params.addtional_menus]]
   title =  "About"

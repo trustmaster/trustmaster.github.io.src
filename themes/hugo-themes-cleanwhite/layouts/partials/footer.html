@@ -15,6 +15,16 @@
                         </a>
                     </li>
                     {{ end }}
+                    {{ with .Site.Params.social.telegram }}
+                    <li>
+                        <a href="{{ . }}">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-telegram fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    {{ end }}
                     {{ with .Site.Params.social.email }}
                     <li>
                         <a href="mailto:{{ . }}">
@@ -301,5 +311,14 @@
 {{ end }}
 
 {{ if .Site.GoogleAnalytics }}
-{{ template "_internal/google_analytics_async.html" . }}
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X79M7WTJT6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X79M7WTJT6');
+</script>
+
 {{ end }}
