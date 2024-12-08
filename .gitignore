@@ -3,3 +3,4 @@ Thumbs.db
 public
 node_modules
 old
+.hugo_build.lock
