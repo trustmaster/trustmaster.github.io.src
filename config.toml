@@ -1,16 +1,21 @@
 title = "A system brought to life"
 baseurl = "https://blog.kodigy.com/"
 canonifyurls = true
-paginate = 6
 theme = "hugo-themes-cleanwhite"
 languageCode = "en-us"
 copyright = "© Vladimir Sibirov. Code released under the MIT license."
-googleAnalytics = "UA-92537342-1" # delete or comment to disable Google Analytics JS generation
-# disqusShortname = "kodigy-blog" #delete or comment to disable Disqus comments
 # PygmentsCodeFences = true
 # pygmentsstyle = "autumn"
 
+[pagination]
+  pagerSize = 6
+
+[markup.goldmark.renderer]
+  unsafe = true
+
 [params]
+  googleAnalytics = "UA-92537342-1" # delete or comment to disable Google Analytics JS generation
+  # disqusShortname = "kodigy-blog" #delete or comment to disable Disqus comments
   custom_css = ["css/custom.css"]
   DateForm = "Jan 2, 2006"
   Description = "Vladimir Sibirov on building software systems and engineering teams"

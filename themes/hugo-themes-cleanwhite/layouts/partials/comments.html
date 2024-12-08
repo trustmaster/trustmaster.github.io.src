@@ -12,6 +12,6 @@ var disq = new iDisqus('disqus-comment', {
     init: true
 });
 </script>
-{{ else if .Site.DisqusShortname }}
+{{ else if .Site.Params.disqusShortname }}
 {{ template "_internal/disqus.html" . }}
 {{ end }}
