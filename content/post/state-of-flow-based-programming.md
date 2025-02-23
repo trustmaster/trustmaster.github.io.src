@@ -88,7 +88,7 @@ What is important here is that you actually _see_ how your application is struct
 
 Visual languages are nice at high level and at describing structure, but when it comes to temporal dimension and describing behavior, traditional text languages are the king. In FBP, you can use them to write your Components. But first let's look at what a Component looks like from the graph perspective (aka its interface):
 
-{{< figure src=/img/post/fbp/fbp_scankeyword_component.png alt="ScanKeyword component example" caption="ScanKeyword component on a graph" width=33% >}}
+{{< figure src=/img/post/fbp/fbp_scankeyword_component.png alt="ScanKeyword component example" caption="ScanKeyword component on a graph" class="w40" >}}
 
 In this example, we have a process called `ScanInport` which is an instance of a component called `ScanKeyword` from the `dsl` package. It has 3 input ports and 1 output port:
 
@@ -178,7 +178,7 @@ Flow-based programming applies most naturally to domains which already have the 
 - Machine Learning
 
 > **Is this just guesswork or based on real data?** Sources of these conclusions are:
-> 
+>
 > - a questionnaire sent on Flow-based programming mailing list a few years ago
 > - a questionnaire I posted in GoFlow repository on GitHub
 > - my observations around the FBP community on the mailing list and Twitter during the last 10+ years
@@ -226,7 +226,7 @@ The [C4 model](https://c4model.com/) is another way of visualizing software arch
 
 An example Components diagram is given below:
 
-{{< figure src=/img/post/fbp/c4_components.png alt="C4 Components diagram example" caption="C4 Components diagram example" width=50% >}}
+{{< figure src=/img/post/fbp/c4_components.png alt="C4 Components diagram example" caption="C4 Components diagram example" class="w75" >}}
 
 C4 is a very powerful and expressive model. No wonder it is gaining popularity and is featured on the ThoughtWorks TechRadar as a headliner of "Diagrams as code" approach. It is supported by many tools and comes with some useful extensions.
 
@@ -248,7 +248,7 @@ Having worked with C4 in a large organization and on large systems, I can share 
 
 The main issue with dataflow approach is that it often gets too granular and low level. It is not uncommon in dataflow systems to have diagrams the size of a tennis-court with hundreds and hundreds of components on them. There are too many details on such diagrams.
 
-{{< figure src=/img/post/fbp/labview_spaghetti_code.png alt="Spaghetti code in LabView" caption="Example of spaghetti code in LabVIEW" width=50% >}}
+{{< figure src=/img/post/fbp/labview_spaghetti_code.png alt="Spaghetti code in LabView" caption="Example of spaghetti code in LabVIEW" class="w75" >}}
 
 With FPB, you write low level components in conventional textual programming languages. Those languages were created to describe behavior, so let the tool do its best job. And then encapsulate implementation details behind the component interface.
 
@@ -282,7 +282,7 @@ The good news is that it's way easier to spot when something is wrong with the a
 
 ### Building software faster
 
-Programmers often seek a new paradigm because they believe it will make their life easier. Many FBP enthusiasts believed that FBP will make them more productive. 
+Programmers often seek a new paradigm because they believe it will make their life easier. Many FBP enthusiasts believed that FBP will make them more productive.
 
 When somebody enters the world of Flow-based (or Dataflow) Programming, they typically expect some or all of the following to be true:
 
@@ -356,11 +356,11 @@ More on these problems and potential solutions below.
 
 Presently there are two big players in this market: [DrawFBP](https://github.com/jpaulm/drawfbp) and [Flowhub](https://flowhub.io/). And they are the very opposites of each other.
 
-{{< figure src=/img/post/fbp/drawfbp_ui_example.png alt="Editing a file reader app in DrawFBP" caption="Editing a file reader app in DrawFBP" width=50% >}}
+{{< figure src=/img/post/fbp/drawfbp_ui_example.png alt="Editing a file reader app in DrawFBP" caption="Editing a file reader app in DrawFBP" class="w60" >}}
 
 DrawFBP is a Java app that was started long ago and its interface isn't very appealing to programmers of the modern days. It uses very own UI flows to create FBP diagrams. It also comes with a code generator feature which works best for the classic JavaFBP. But it doesn't support universal `.fbp` or `.json` graph notations and isn't very useful for anything than just sketching (hello, UML) if you use a runtime that is not explicitly supported by this tool.
 
-{{< figure src=/img/post/fbp/flowhub_react_todo.png alt="React TODO application in Flowhub" caption="React TODO application in Flowhub" width=50% >}}
+{{< figure src=/img/post/fbp/flowhub_react_todo.png alt="React TODO application in Flowhub" caption="React TODO application in Flowhub" class="w75" >}}
 
 Flowhub (and its open source sister [Noflo-UI](https://github.com/noflo/noflo-ui)) is an app that runs right in your browser, and it's an IDE which does everything: edits graphs and components, saves projects on GitHub, runs tests, talks to the runtime, introspects the running application. And it does so by making use of [universal protocol](https://github.com/flowbased/fbp-protocol) and file formats. Flowhub had a lot of amazing features in the peak of its popularity around 2015, but it didn't really dominate the market of Software Development Tools. IMO, for the following reasons:
 

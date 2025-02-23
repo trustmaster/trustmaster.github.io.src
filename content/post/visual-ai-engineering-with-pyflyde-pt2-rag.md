@@ -350,7 +350,7 @@ To avoid recreating the database from scratch or adding the same documents repea
 
 Once we have populated the database with vectors of chunked documents, the actual retrieval of documents relevant to a search `query` and embedding of the search results into LLaMA's prompt is quite simple:
 
-{{< figure src="/img/post/pyflyde/rag.flyde.avif" alt="Rag.flyde" caption="Flow for Retrieval Augmentation of Ollama prompt" width=60% >}}
+{{< figure src="/img/post/pyflyde/rag.flyde.avif" alt="Rag.flyde" caption="Flow for Retrieval Augmentation of Ollama prompt" class="w60" >}}
 
 ### Retriever component
 
