@@ -1,0 +1,6 @@
+<div>
+  <button class="button" onclick="this.nextElementSibling.classList.toggle('hidden')">
+    {{ .Get "title" | default "Show Code" }} ↓
+  </button>
+  <pre class="codespoiler hidden">{{ highlight .Inner (.Get "lang" | default "plaintext") "" }}</pre>
+</div>

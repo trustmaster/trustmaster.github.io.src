@@ -1,8 +1,8 @@
 .table-of-contents {
-  background-color: #e7e7db;
-  border-radius: 1em;
-  padding: 2px 32px 2px 32px;
-  margin-top: 10px;
+    background-color: #e7e7db;
+    border-radius: 1em;
+    padding: 2px 32px 2px 32px;
+    margin-top: 10px;
 }
 
 .table-of-contents h2 {
@@ -15,9 +15,40 @@
 }
 
 .img-container {
-  width: 100%;
+    width: 100%;
 }
 
 .box {
-  margin: 0 auto;
+    margin: 0 auto;
+}
+
+.float-right {
+    float: right;
+    margin-right: 50%;
+}
+
+.button {
+    border-color: #e26d6d;
+    background: #e26d6d;
+    color: #fff;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.codespoiler {
+    background: #38312f;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+.hidden {
+    display: none;
+}
+
+pre code {
+    font-size: 14px;
 }

@@ -8,57 +8,60 @@ copyright = "© Vladimir Sibirov. Code released under the MIT license."
 # pygmentsstyle = "autumn"
 
 [pagination]
-  pagerSize = 6
+pagerSize = 6
+
+[markup]
+[markup.highlight]
+style = "onedark"
 
 [markup.goldmark.renderer]
-  unsafe = true
+unsafe = true
 
 [params]
-  googleAnalytics = "UA-92537342-1" # delete or comment to disable Google Analytics JS generation
-  # disqusShortname = "kodigy-blog" #delete or comment to disable Disqus comments
-  custom_css = ["css/custom.css"]
-  DateForm = "Jan 2, 2006"
-  Description = "Vladimir Sibirov on building software systems and engineering teams"
-  Author = "Vladimir Sibirov"
-  postSummariesFrontPage = 6 #Number of post summaries to show on front page, comment out to allow default(4)
-  showReadTime = true #set to false to exclude read time from header of post
-  header_image = "img/home-bg.jpg"
+googleAnalytics = "UA-92537342-1" # delete or comment to disable Google Analytics JS generation
+# disqusShortname = "kodigy-blog" #delete or comment to disable Disqus comments
+custom_css = ["css/custom.css"]
+DateForm = "Jan 2, 2006"
+Description = "Vladimir Sibirov on building software systems and engineering teams"
+Author = "Vladimir Sibirov"
+postSummariesFrontPage = 6                                                          #Number of post summaries to show on front page, comment out to allow default(4)
+showReadTime = true                                                                 #set to false to exclude read time from header of post
+header_image = "img/home-bg.jpg"
 
-  # Sidebar settings
-  about_me = true
-  sidebar_about_description = "I'm a tech lead, teamwork amplifier, and flow-based programming ambassador"
-  sidebar_avatar = "/img/avatar.jpg"      # use absolute URL, seeing it's used in both `/` and `/about/`
+# Sidebar settings
+about_me = true
+sidebar_about_description = "I'm a tech lead, teamwork amplifier, and flow-based programming ambassador"
+sidebar_avatar = "/img/avatar.jpg"                                                                       # use absolute URL, seeing it's used in both `/` and `/about/`
 
-  featured_tags = true 
-  featured_condition_size = 1 
+featured_tags = true
+featured_condition_size = 1
 
-  [params.social]
-  rss            = true 
-  # email          = "youremail@gmail.com"
-  # facebook      = "full profile url in facebook"
-  # googleplus    = "full profile url in googleplus"
-  twitter        = "https://twitter.com/sibiroff"
-  linkedin       = "https://www.linkedin.com/in/sibirov"
-  # stackoverflow  = "https://stackoverflow.com/users/yourstackoverflowid"
-  # instagram     = "full profile url in instagram"
-  github         = "https://github.com/trustmaster"
-  # medium         = "full profile url in medium"
-  telegram = "https://t.me/OctomatioBot?start=YmxvZy5rb2RpZ3kuY29tL2luZGV4LnhtbA"
+[params.social]
+rss = true
+# email          = "youremail@gmail.com"
+# facebook      = "full profile url in facebook"
+# googleplus    = "full profile url in googleplus"
+twitter = "https://twitter.com/sibiroff"
+linkedin = "https://www.linkedin.com/in/sibirov"
+# stackoverflow  = "https://stackoverflow.com/users/yourstackoverflowid"
+# instagram     = "full profile url in instagram"
+github = "https://github.com/trustmaster"
+# medium         = "full profile url in medium"
+telegram = "https://t.me/OctomatioBot?start=YmxvZy5rb2RpZ3kuY29tL2luZGV4LnhtbA"
 
-  [[params.addtional_menus]]
-  title =  "About"
-  href =  "/about/author/"
+[[params.addtional_menus]]
+title = "About"
+href = "/about/author/"
 
 [[menu.main]]
-  name = "Home"
-  url = "/"
-  weight = -200
+name = "Home"
+url = "/"
+weight = -200
 [[menu.main]]
-  name = "Archives"
-  url = "/post/"
-  weight = -180
+name = "Archives"
+url = "/post/"
+weight = -180
 [[menu.main]]
-  name = "About"
-  url = "/about/author/"
-  weight = -160
-
+name = "About"
+url = "/about/author/"
+weight = -160
