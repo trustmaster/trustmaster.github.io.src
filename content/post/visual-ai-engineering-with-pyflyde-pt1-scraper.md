@@ -67,7 +67,7 @@ Learn more about Flow-based Programming from [What is Flow-based Programming](ht
 
 Here are the core concepts of Flyde that we will use in this article:
 
-{{< figure src="/img/post/pyflyde/flyde-concepts.png" alt="Core Concepts of Flyde overview diagram" width=50% >}}
+{{< figure src="/img/post/pyflyde/flyde-concepts.png" alt="Core Concepts of Flyde overview diagram" class="w50" >}}
 
 - **Node** is the main building block. Everything consists of nodes that process data and pass it along. There are two types of Nodes:
   - __Code Node__ (aka __Component__ in PyFlyde and FBP) - nodes that are defined in a textual programming language like Python, TypeScript, etc.
@@ -180,7 +180,7 @@ This approach helps catch design issues early and makes the development process 
 
 Let's start with a simple flow that handles basic web pages:
 
-{{< figure src="/img/post/pyflyde/scrape_v1.flyde.avif" alt="Scrape.flyde version 1" width=50% >}}
+{{< figure src="/img/post/pyflyde/scrape_v1.flyde.avif" alt="Scrape.flyde version 1" class="w60" caption="The first scraper flow" >}}
 
 Following our developer workflow defined above, at first just define the interface parts of the nodes on the graph, and then complete the behavior implementation.
 
@@ -323,17 +323,17 @@ Then we can go to VSCode, press `Cmd + Shift + P`, and choose the `Flyde: New Vi
 
 In the Flyde node toolbar on the right side, we need two items for now:
 
-{{< figure alt="Flyde node selection toolbar" src="/img/post/pyflyde/flyde-nodebar-1.avif" width=25% >}}
+{{< figure alt="Flyde node selection toolbar" src="/img/post/pyflyde/flyde-nodebar-1.avif" class="w40" >}}
 
 We need to add our constant values for the URL, issues limit, and directory path using the `Essentials` -> `Inline Value` button.
 
 For the first one, enter `https://softwareleadweekly.com/issues/` as the value, click `Change type`, and select `String` in the dropdown. For the limit of the number of issues, add another Inline Value, enter `20` as the value, and choose `Number` as its type. Now you know how to add constants to the diagram, so you can add them whenever needed like this.
 
-{{< figure alt="Flyde node selection toolbar" src="/img/post/pyflyde/flyde-nodebar-2.avif" width=25% >}}
+{{< figure alt="Flyde node selection toolbar" src="/img/post/pyflyde/flyde-nodebar-2.avif" class="w40" >}}
 
 Adding the nodes that we defined in our Python code above requires hitting that small `View all` button at the bottom right of the toolbar. It opens a node browser window:
 
-{{< figure src="/img/post/pyflyde/flyde-add-node.avif" alt="Add node dialog in Flyde editor" width=75% >}}
+{{< figure src="/img/post/pyflyde/flyde-add-node.avif" alt="Add node dialog in Flyde editor" class="w75" >}}
 
 Select our `swlwi/scrape.flyde.ts` under the _Current Project_, and add the nodes by selecting them in the right panel and clicking the _Add_ button. Add all the necessary nodes to the flow and drag them to the desired positions on the canvas.
 
@@ -341,7 +341,7 @@ When you hover over a node, all of its inputs and outputs pop up. To connect two
 
 This way, you can draw the whole flow and get a `Scrape.flyde` diagram that looks like the picture we already saw above:
 
-{{< figure src="/img/post/pyflyde/scrape_v1.flyde.avif" alt="Scrape.flyde version 1" width=50% >}}
+{{< figure src="/img/post/pyflyde/scrape_v1.flyde.avif" alt="Scrape.flyde version 1" class="w60" >}}
 
 Yay! We've created our first Flyde flow!
 
@@ -353,7 +353,7 @@ The `ListIssues` and `ExtractArticles` contain a lot of HTML parsing with Beauti
 
 #### ListIssues component
 
-{{< figure src="/img/post/pyflyde/scrape_list_issues.avif" alt="ListIssues component view in Flyde" width=25%  >}}
+{{< figure src="/img/post/pyflyde/scrape_list_issues.avif" alt="ListIssues component view in Flyde" class="w25" >}}
 
 Below is the main logic of the `ListIssues` component. The HTML parsing logic using BeautifulSoap is omitted. You can find the full source in [scrape.py](https://github.com/trustmaster/swlwi/blob/main/swlwi/scrape.py).
 
@@ -403,7 +403,7 @@ After fetching and parsing the newsletter index page, we find all issue elements
 
 #### ExtractArticles component
 
-{{< figure src="/img/post/pyflyde/scrape_extract_articles.avif" alt="ExtractArticles component view in Flyde" width=25% >}}
+{{< figure src="/img/post/pyflyde/scrape_extract_articles.avif" alt="ExtractArticles component view in Flyde" class="w25" >}}
 
 The `ExtractArticles` logic is going to be similar to the previous component and it is also actively using BeautifulSoup.
 
@@ -446,7 +446,7 @@ See the full source in the [scrape.py on Github](https://github.com/trustmaster/
 
 #### FetchArticle component
 
-{{< figure src="/img/post/pyflyde/scrape_fetch_article.avif" alt="FetchArticle component view in Flyde" width=25% >}}
+{{< figure src="/img/post/pyflyde/scrape_fetch_article.avif" alt="FetchArticle component view in Flyde" class="w25" >}}
 
 The `FetchArticle` is generic enough, so let's write the complete code:
 
@@ -490,7 +490,7 @@ The returned `dict` maps an output name to a value that needs to be sent to that
 
 #### ExtractArticleContent component
 
-{{< figure src="/img/post/pyflyde/scrape_extract_article_content.avif" alt="ExtractArticleContent component view in Flyde"  width=25% >}}
+{{< figure src="/img/post/pyflyde/scrape_extract_article_content.avif" alt="ExtractArticleContent component view in Flyde"  class="w25" >}}
 
 The next component in our scraper module is `ExtractArticleContent`.
 
@@ -527,7 +527,7 @@ The implementation of this `process` makes use of `markdownify` package and our 
 
 #### SaveArtile component
 
-{{< figure src="/img/post/pyflyde/scrape_save_article.avif" alt="SaveArticle component view in Flyde" width=25% >}}
+{{< figure src="/img/post/pyflyde/scrape_save_article.avif" alt="SaveArticle component view in Flyde" class="w25" >}}
 
 Let's implement `SaveArtile` which saves the result to the disk, as this is quite standard Python code:
 
@@ -628,7 +628,7 @@ Oops, we forgot that some Single Page Applications (SPA) are not so easy to acce
 
 To address the problem of fetching pages that require JavaScript to render, we are going to make the following modifications to our scraper:
 
-{{< figure src="/img/post/pyflyde/scrape_v2.flyde.avif" alt="Scrape.flyde version 2" width=50% caption="Modified Scrape.flyde flow with SPA handling" >}}
+{{< figure src="/img/post/pyflyde/scrape_v2.flyde.avif" alt="Scrape.flyde version 2" class="w60" caption="Modified Scrape.flyde flow with SPA handling" >}}
 
 1. Modify `FetchArticle` to check if the response HTML contains errors related to JavaScript or cookies. Create an alternative output path if the article requires JavaScript to fetch. We keep trying to fetch a page with just `requests` before switching to Playwright to keep our scraper fast by default.
 2. Create a new node called `FetchArticleWithJavascript` which fetches the article HTML using Playwright. We are only going to use it for pages that failed plain request retrieval because Playwright uses headless Chromium under the hood and works much slower.
@@ -688,7 +688,7 @@ class FetchArticle(Component):
 
 Next, we create a separate component that fetches an article using Playwright.
 
-{{< figure src="/img/post/pyflyde/scrape_fetch_article_with_javascript.avif" alt="FetchArticleWithJavascript component view in Flyde" width=25% >}}
+{{< figure src="/img/post/pyflyde/scrape_fetch_article_with_javascript.avif" alt="FetchArticleWithJavascript component view in Flyde" class="w25" >}}
 
 The implementation is similar to the original `FetchArticle`, but we use the `sync_playwright` API to launch a Chromium instance, navigate to the article URL, and retrieve the page contents.
 
@@ -757,7 +757,7 @@ We could stop with our scraper as it is probably good enough at this point. Howe
 
 The new node we are adding here is called `SkipExistingIssues`, and in the graph, it looks like this:
 
-{{< figure src="/img/post/pyflyde/scrape_skip_existing_issues.avif" alt="SkipExistingIssues component view in Flyde" width=25% >}}
+{{< figure src="/img/post/pyflyde/scrape_skip_existing_issues.avif" alt="SkipExistingIssues component view in Flyde" class="w25" >}}
 
 This node checks if the issue already exists in the directory under a given path. If it does, the processing of the issue stops at this stage.
 
@@ -807,7 +807,7 @@ pyflyde gen swlwi/scrape.py
 
 Then we can update `Scrape.flyde` in VSCode. Here is the scraper flow after adding this new node to it:
 
-{{< figure src="/img/post/pyflyde/scrape_v3.flyde.avif" alt="Scrape.flyde version 3" width=50% >}}
+{{< figure src="/img/post/pyflyde/scrape_v3.flyde.avif" alt="Scrape.flyde version 3" class="w60" >}}
 
 #### Adding a rate limiter
 

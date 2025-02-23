@@ -14,7 +14,7 @@ Welcome back to our journey into Visual AI Engineering with PyFlyde! In this sec
 
 In [Part 1 of this tutorial](/post/visual-ai-engineering-with-pyflyde-pt1-scraper), we embarked on an exciting journey to build a flexible data extraction flow. We successfully created a web scraper that fetches articles from the Software Leads Weekly newsletter, cleans them up, and saves them as local Markdown files. Here’s a quick visual recap of what we accomplished:
 
-{{< figure src="/img/post/pyflyde/scrape_v3.flyde.avif" alt="Scrape.flyde version 3" width=50% >}}
+{{< figure src="/img/post/pyflyde/scrape_v3.flyde.avif" alt="Scrape.flyde version 3" class="w75" >}}
 
 Throughout the first part, we learned how to:
 
@@ -135,7 +135,7 @@ Now that we have better understanding of what RAG is, it's time to proceed to im
 
 Currently, we have our Knowledge Base saved on disk as Markdown files in issue subfolders. Unfortunately, an LLM cannot magically work with our local Markdown files. We need to turn our Markdown articles into a searchable database first. This process is called indexing, and we'll implement it as the `Index.flyde` flow:
 
-{{< figure src="/img/post/pyflyde/index.flyde.avif" alt="Index.flyde" caption="The document Indexer flow in Flyde" width=50% >}}
+{{< figure src="/img/post/pyflyde/index.flyde.avif" alt="Index.flyde" caption="The document Indexer flow in Flyde" class="w50" >}}
 
 For RAG to work, we first need to create a searchable document index in a vector store. A vector store is a database that treats data chunks as vectors of numbers, allowing it to easily find similarities between different documents and query inputs. It does not work well with large bodies of plain text out of the box, so we will have to do two things before we store our articles in a vector store:
 
@@ -184,7 +184,7 @@ class ListArticles(Component):
 
 The `DocumentLoader` reads the contents of a Markdown file from the specified path and converts it into a LangChain Document.
 
-{{< figure src="/img/post/pyflyde/rag_document_loader.avif" alt="DocumentLoader component view in Flyde" width=25% >}}
+{{< figure src="/img/post/pyflyde/rag_document_loader.avif" alt="DocumentLoader component view in Flyde" class="w25" >}}
 
 The Markdown content is saved in the `page_content` of the document, which will be used to search and return the text.
 
@@ -242,7 +242,7 @@ class DocumentLoader(Component):
 
 The next node, `DocumentSplitter`, uses LangChain's `MarkdownDocumentSplitter` to split each `Document` into smaller `Document` chunks of a specific size.
 
-{{< figure src="/img/post/pyflyde/rag_document_splitter.avif" alt="DocumentSplitter component view in Flyde" width=25% >}}
+{{< figure src="/img/post/pyflyde/rag_document_splitter.avif" alt="DocumentSplitter component view in Flyde" class="w25" >}}
 
 The `MarkdownTextSplitter` from LangChain knows how to split our source `document` into chunks of up to `chunk_size` characters. We set `chunk_overlap` so that these chunks overlap slightly, increasing the probability of having enough context for the request.
 
@@ -277,7 +277,7 @@ We are going to create our `VectorStore` component as a wrapper around the `SQLi
 
 However, we need to ensure the `SQLiteVec` store itself stays in memory all the time and we don't recreate it on every new input. That's why we will implement an `_init()` method which initializes the store only once.
 
-{{< figure src="/img/post/pyflyde/rag_vector_store.avif" alt="VectorStore component view in Flyde" width=25% >}}
+{{< figure src="/img/post/pyflyde/rag_vector_store.avif" alt="VectorStore component view in Flyde" class="w25" >}}
 
 While `process()` is called on every new input list of documents, we call `_init()` inside of it to ensure the embeddings encoder and the SQLiteVec instance are created once.
 
@@ -356,7 +356,7 @@ Once we have populated the database with vectors of chunked documents, the actua
 
 We provide the same path to the vector DB to the `Retriever` as an inline value. The `query` input comes from outside the flow, and the `response` output is used to send the results. There is no UI to get the query and display the results in this flow yet, because we are actually going to integrate it into an external Streamlit application in the next section.
 
-{{< figure src="/img/post/pyflyde/rag_retriever.avif" alt="Retriever component view in Flyde" width=25% >}}
+{{< figure src="/img/post/pyflyde/rag_retriever.avif" alt="Retriever component view in Flyde" class="w25" >}}
 
 The Retriever implements the reader part of the vector store and reuses the same vector store logic for initialization. In addition, it uses LangChain's `as_retriever()` interface to perform the actual retrieval of matching documents.
 
@@ -408,7 +408,7 @@ The `Retriever` retrieves documents (or chunks of articles, to be more precise) 
 
 Finally, let's look at our LLaMA wrapper component:
 
-{{< figure src="/img/post/pyflyde/rag_ollama_chat.avif" alt="OllamaChat component view in Flyde" width=25% >}}
+{{< figure src="/img/post/pyflyde/rag_ollama_chat.avif" alt="OllamaChat component view in Flyde" class="w25" >}}
 
 This node receives the unmodified `query` and the `context` string from the `Retriever`. It then creates a prompt and sends it to a LLaMA chat to get a response.
 
@@ -603,7 +603,7 @@ streamlit run app.py
 
 Here is how the UI of our application looks in action in a browser window:
 
-{{< figure src="/img/post/pyflyde/streamlit_app_example.avif" alt="Streamlit App UI" width=60% >}}
+{{< figure src="/img/post/pyflyde/streamlit_app_example.avif" alt="Streamlit App UI" class="w60" >}}
 
 When finished chatting, type `/bye` to shut down our PyFlyde flow gracefully, and hit `Ctrl + C` to close the Streamlit app in the terminal.
 

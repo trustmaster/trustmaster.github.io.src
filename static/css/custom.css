@@ -18,8 +18,67 @@
     width: 100%;
 }
 
-.box {
+.img-container .box {
+    text-align: center;
     margin: 0 auto;
+}
+
+.img-container figure.w25 img {
+    max-width: 25%;
+}
+
+.img-container figure.w40 img {
+    max-width: 40%;
+}
+
+.img-container figure.w50 img {
+    max-width: 50%;
+}
+
+.img-container figure.w60 img {
+    max-width: 60%;
+}
+
+.img-container figure.w75 img {
+    max-width: 75%;
+}
+
+.img-container figure.w90 img {
+    max-width: 90%;
+}
+
+.img-container figure.w100 img {
+    max-width: 100%;
+}
+
+.img-container .box figcaption {
+    text-align: center;
+}
+
+@media (max-width: 480px) {
+    .img-container figure.w25 img {
+        max-width: 50%;
+    }
+
+    .img-container figure.w40 img {
+        max-width: 80%;
+    }
+
+    .img-container figure.w50 img {
+        max-width: 80%;
+    }
+
+    .img-container figure.w60 img {
+        max-width: 90%;
+    }
+
+    .img-container figure.w75 img {
+        max-width: 95%;
+    }
+
+    .img-container figure.w90 img {
+        max-width: 100%;
+    }
 }
 
 .float-right {
