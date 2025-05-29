@@ -5,6 +5,8 @@ description: "In this tutorial, we explore how to use Flyde, a visual programmin
 date:        2025-02-22
 tags:        ["fbp", "data", "python"]
 categories:  ["Flow-based Programming" ]
+image:       "/img/post/pyflyde/article_header.avif"
+thumbnail:   "/img/post/pyflyde/article_thumbnail.webp"
 draft:       false
 ---
 
