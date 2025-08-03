@@ -6,7 +6,7 @@ date:        2025-08-03
 tags:        ["fbp", "data", "llm", "python"]
 categories:  ["Flow-based Programming" ]
 image:       "/img/post/pyflyde/article_header4.webp"
-thumbnail:   "/img/post/pyflyde/article_thumbnail.webp"
+thumbnail:   "/img/post/pyflyde/article_thumbnail.jpg"
 draft:       false
 ---
 
