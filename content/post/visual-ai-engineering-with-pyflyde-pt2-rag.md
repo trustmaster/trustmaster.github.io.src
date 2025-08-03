@@ -879,7 +879,7 @@ Here's a recap of the valuable lessons we've learned:
   - Gradually adding complexity and covering more use cases.
   - Embedding data flows into conventional Python applications.
 
-#### Reflecting on Flow-Based Programming
+### Reflecting on Flow-Based Programming and Flyde
 
 Flow-based programming offers a unique approach to Data and AI Engineering. It aligns perfectly with the flow-based nature of data pipelines, providing a powerful tool for designing, structuring, and visualizing applications. This approach simplifies onboarding, enhances collaboration, and makes the development process more enjoyable.
 
@@ -888,6 +888,14 @@ However, it's important to acknowledge that tools like Flyde and PyFlyde are sti
 #### Embracing AI Coding Assistants
 
 One of the standout benefits of this paradigm is its compatibility with AI coding assistants. By defining clear data flows and interfaces, AI assistants like Copilot and Claude can efficiently generate implementation code, making the development process smoother and more efficient. In fact, this is how this project built: I took more of an architect's seat defining the flows and the interfaces of the black boxes, and the AI agents wrote most of the implementation code.
+
+#### What makes Flyde special?
+
+This is a question I kept coming back to while working on this tutorial: what actually makes Flyde special? Over the past 15 years, I’ve explored, used, and even contributed to a variety of visual and dataflow programming tools. Yet, none of them truly became part of my regular workflow. The main reason? They always felt disconnected from the everyday tools that most developers rely on.
+
+No-code, low-code, lego-code: these buzzwords were exciting for a while. But once the initial hype faded, it became clear that apps built with those platforms were best suited for personal projects. Scaling them up or maintaining them as part of a larger team often meant introducing others to something unfamiliar and, frankly "exotic".
+
+Flyde takes a different approach. It’s designed to fit right into the toolchain you already use. If you’re comfortable with a modern IDE, you can start building real, meaningful applications with Flyde right away. Even better, Flyde’s visual clarity doesn’t come at the expense of flexibility: you can combine it with the vast ecosystem of libraries, frameworks, plugins, and extensions that you and your team already know and love. This synergy is what sets Flyde apart and makes it a genuinely practical tool for modern development.
 
 #### Next Steps
 
