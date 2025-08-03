@@ -12,7 +12,7 @@ pagerSize = 6
 
 [markup]
 [markup.highlight]
-style = "onedark"
+style = "catppuccin-frappe"
 
 [markup.goldmark.renderer]
 unsafe = true
