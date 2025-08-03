@@ -1,10 +1,12 @@
 ---
-title:       "AI Engineering Goes Visual: Building an LLM RAG with PyFlyde & LangChain"
+title:       "AI Engineering Goes Visual part 2: Building an LLM RAG with PyFlyde & LangChain"
 subtitle:    "Use Flyde to design and wire up LangChain, Vector Store, and Ollama or OpenAI API to perform Retrieval Augmented Generation"
 description: "This part builds upon the Scraper app that we created in the part 1 and uses our visual programming skills to dive deeper in the LLM engineering world. This time we turn our article database into a RAG app, making use of LangChain, Vector Store and local LLaMA3 or OpenAI API."
-date:        2025-02-23
+date:        2025-08-03
 tags:        ["fbp", "data", "llm", "python"]
 categories:  ["Flow-based Programming" ]
+image:       "/img/post/pyflyde/article_header4.webp"
+thumbnail:   "/img/post/pyflyde/article_thumbnail.webp"
 draft:       false
 ---
 
@@ -12,9 +14,9 @@ draft:       false
 
 Welcome back to our journey into Visual AI Engineering with PyFlyde! In this second part of our tutorial, we'll dive deeper into the fascinating world of AI and data engineering, combining modern tools and libraries with the intuitive power of visual programming.
 
-In [Part 1 of this tutorial](/post/visual-ai-engineering-with-pyflyde-pt1-scraper), we embarked on an exciting journey to build a flexible data extraction flow. We successfully created a web scraper that fetches articles from the Software Leads Weekly newsletter, cleans them up, and saves them as local Markdown files. Here’s a quick visual recap of what we accomplished:
+In [Part 1 of this tutorial](/post/visual-ai-engineering-with-pyflyde-pt1-scraper), we embarked on an exciting journey to build a flexible data extraction flow. We successfully created a web scraper that fetches articles from the Software Leads Weekly newsletter, cleans them up, and saves them as local Markdown files. Here’s the Flyde flow that we have implemented:
 
-{{< figure src="/img/post/pyflyde/scrape_v3.flyde.avif" alt="Scrape.flyde version 3" class="w75" >}}
+{{< figure src="/img/post/pyflyde/scrape_v3.flyde.webp" alt="Scrape.flyde version 3" class="w100" >}}
 
 Throughout the first part, we learned how to:
 
@@ -52,20 +54,22 @@ Here is the updated `dependencies` section of our `pyproject.toml`:
 
 ```toml
 dependencies = [
-    "beautifulsoup4",               # HTML parsing
-    "langchain",                    # LLM abstraction layer
-    "langchain-community >= 0.3.2", # Community packages for LangChain, including SQLiteVec
-    "langchain-huggingface",        # HuggingFace model loader and API
-    "langchain-core",               # Core
-    "langchain-ollama",             # Ollama wrapper
-    "langchain-text-splitters",     # Needed for chunking
-    "markdownify",                  # HTML to Markdown conversion
-    "playwright",                   # JavaScript-enabled scraping
-    "pyflyde >= 0.0.11",            # Flyde runtime for Python
-    "requests",                     # Basic HTTP requests
-    "sentence-transformers",        # Needed to create embeddings
-    "streamlit",                    # Simple web UI
-    "sqlite-vec",                   # Vector Store on top of SQLite
+    "beautifulsoup4 >= 4.0.0, < 5.0.0",  # HTML parsing
+    "chardet >= 5.0.0, < 6.0.0",
+    "langchain ~= 0.3.0",                # LLM abstraction layer
+    "langchain-community ~= 0.3.2",      # Community packages for LangChain, including SQLiteVec
+    "langchain-huggingface ~= 0.3.0",    # HuggingFace model loader and API
+    "langchain-core ~= 0.3.0",           # Core
+    "langchain-ollama ~= 0.3.0",         # Ollama wrapper
+    "langchain-openai ~= 0.3.0",         # OpenAI API wrapper
+    "langchain-text-splitters ~= 0.3.0", # Needed for chunking
+    "markdownify ~= 1.1.0",
+    "playwright >= 1.0.0, < 2.0.0",
+    "pyflyde ~= 0.1.0",                  # Flyde runtime for Python
+    "requests >= 2.0.0, < 3.0.0",
+    "sentence-transformers ~= 4.1.0",    # Needed to create embeddings
+    "streamlit ~= 1.46.0",               # Simple web UI
+    "sqlite-vec ~= 0.1.0",               # Vector Store on top of SQLite
 ]
 ```
 
@@ -135,7 +139,7 @@ Now that we have better understanding of what RAG is, it's time to proceed to im
 
 Currently, we have our Knowledge Base saved on disk as Markdown files in issue subfolders. Unfortunately, an LLM cannot magically work with our local Markdown files. We need to turn our Markdown articles into a searchable database first. This process is called indexing, and we'll implement it as the `Index.flyde` flow:
 
-{{< figure src="/img/post/pyflyde/index.flyde.avif" alt="Index.flyde" caption="The document Indexer flow in Flyde" class="w50" >}}
+{{< figure src="/img/post/pyflyde/index.flyde.webp" alt="Index.flyde" caption="The document Indexer flow in Flyde" class="w90" >}}
 
 For RAG to work, we first need to create a searchable document index in a vector store. A vector store is a database that treats data chunks as vectors of numbers, allowing it to easily find similarities between different documents and query inputs. It does not work well with large bodies of plain text out of the box, so we will have to do two things before we store our articles in a vector store:
 
@@ -153,6 +157,8 @@ For the RAG part, we will create another Python module `swlwi/rag.py`.
 We are going to use [LangChain](https://python.langchain.com/docs/tutorials/) as an abstraction over various chunking, embedding encoder/decoder methods and models, as well as a vector store.
 
 #### ListArticles component
+
+{{< figure src="/img/post/pyflyde/rag_list_articles.webp" alt="ListArticles component view in Flyde" class="w25" >}}
 
 The `ListArticles` component is pretty straightforward. It lists all the Markdown files across all issues that we scraped with the scraper flow. To do that, it goes over all `issue-` folders in the index and gets paths of all `*.md` files inside them.
 
@@ -177,6 +183,7 @@ class ListArticles(Component):
                 article_path = os.path.join(issue_path, article)
                 self.send("article_path", article_path)
         # Send EOF when finished listing
+        logger.info("Finished listing articles")
         self.stop()
 ```
 
@@ -184,7 +191,7 @@ class ListArticles(Component):
 
 The `DocumentLoader` reads the contents of a Markdown file from the specified path and converts it into a LangChain Document.
 
-{{< figure src="/img/post/pyflyde/rag_document_loader.avif" alt="DocumentLoader component view in Flyde" class="w25" >}}
+{{< figure src="/img/post/pyflyde/rag_document_loader.webp" alt="DocumentLoader component view in Flyde" class="w25" >}}
 
 The Markdown content is saved in the `page_content` of the document, which will be used to search and return the text.
 
@@ -202,6 +209,7 @@ class DocumentLoader(Component):
     outputs = {"document": Output(description="Langchain Document", type=Document)}
 
     def process(self, path: str) -> dict[str, Document]:
+        logger.info(f"Loading document from {path}")
         with open(path, "r") as f:
             text = f.read()
 
@@ -234,7 +242,7 @@ class DocumentLoader(Component):
                 "summary": summary,
             },
         )
-
+        logger.info(f"Loaded document: {title} from {path}")
         return {"document": doc}
 ```
 
@@ -242,7 +250,7 @@ class DocumentLoader(Component):
 
 The next node, `DocumentSplitter`, uses LangChain's `MarkdownDocumentSplitter` to split each `Document` into smaller `Document` chunks of a specific size.
 
-{{< figure src="/img/post/pyflyde/rag_document_splitter.avif" alt="DocumentSplitter component view in Flyde" class="w25" >}}
+{{< figure src="/img/post/pyflyde/rag_document_splitter.webp" alt="DocumentSplitter component view in Flyde" class="w25" >}}
 
 The `MarkdownTextSplitter` from LangChain knows how to split our source `document` into chunks of up to `chunk_size` characters. We set `chunk_overlap` so that these chunks overlap slightly, increasing the probability of having enough context for the request.
 
@@ -255,8 +263,7 @@ class DocumentSplitter(Component):
 
     inputs = {
         "document": Input(description="Document to split", type=Document),
-        "chunk_size": Input(description="Size of each chunk",
-            type=int, mode=InputMode.STICKY, value=2000),
+        "chunk_size": Input(description="Size of each chunk", type=int, mode=InputMode.STICKY, value=2000),
     }
 
     outputs = {"documents": Output(description="Chunks of text")}
@@ -266,6 +273,7 @@ class DocumentSplitter(Component):
         texts = [document.page_content]
         metadatas = [document.metadata]
         documents = splitter.create_documents(texts, metadatas)
+        logger.info(f"Split document {document.metadata['path']} into {len(documents)} chunks")
         return {"documents": documents}
 ```
 
@@ -277,7 +285,7 @@ We are going to create our `VectorStore` component as a wrapper around the `SQLi
 
 However, we need to ensure the `SQLiteVec` store itself stays in memory all the time and we don't recreate it on every new input. That's why we will implement an `_init()` method which initializes the store only once.
 
-{{< figure src="/img/post/pyflyde/rag_vector_store.avif" alt="VectorStore component view in Flyde" class="w25" >}}
+{{< figure src="/img/post/pyflyde/rag_vector_store.webp" alt="VectorStore component view in Flyde" class="w25" >}}
 
 While `process()` is called on every new input list of documents, we call `_init()` inside of it to ensure the embeddings encoder and the SQLiteVec instance are created once.
 
@@ -291,31 +299,34 @@ class VectorStore(Component):
 
     inputs = {
         "documents": Input(description="Documents to store"),
-        "path": Input(description="Path to the vector store",
-            type=str, mode=InputMode.STICKY, value="./index/vectors"),
+        "path": Input(description="Path to the vector store", type=str, mode=InputMode.STICKY,
+            value="./index/vectors"),
     }
 
     def _init(self, path: str):
         if not hasattr(self, "_embeddings"):
-            # Load the embeddings encoder/decoder model from HuggingFace
+            logger.info("Loading embeddings")
             self._embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
         if not hasattr(self, "_vector_store"):
+            logger.info("Creating vector store")
             # Create path if not exists
             os.makedirs(path, exist_ok=True)
-            # Create the Vector Store (opens an existing database or creates a new one)
-            # and pass the embeddings encoder/decoder model to it
             self._vector_store = SQLiteVec(
-                table="swlwi_embeddings", connection=None,
-                db_file=f"{path}/db.sqlite3", embedding=self._embeddings
+                table="swlwi_embeddings", connection=None, db_file=f"{path}/db.sqlite3", embedding=self._embeddings
             )
 
     def process(self, documents: list, path: str):
-        # Load the store and embeddings if needed
+        logger.info(f"VectorStore Processing {len(documents)} documents")
         self._init(path)
-
-        logger.info(f"Adding {len(documents)} documents from {documents[0].metadata['path']}
-            to the vector store")
-        self._vector_store.add_documents(documents)
+        logger.info(f"Adding {len(documents)} documents from {documents[0].metadata['path']} to the vector store")
+        try:
+            self._vector_store.add_documents(documents)
+        except sqlite3.OperationalError as e:
+            if "UNIQUE constraint failed" in str(e):
+                logger.info("Some documents already exist in the vector store, skipping duplicates")
+            else:
+                # Re-raise if it's a different error
+                raise
 ```
 
 As you see in the code, our vector store needs a `HuggingFaceEmbeddings` object to perform vector searches on the documents. What does this Embeddings object do? When we store new documents, it converts text sentences into searchable vectors. When we query the store, it translates the query into an embedding vector as well. Then the store can perform similarity searches among vectors.
@@ -324,10 +335,10 @@ Since we use Ollama, it might be tempting to assume that we need to use Ollama E
 
 ### Running the flow
 
-With all the components implemented, we make them available in Flyde with:
+With all the components implemented, we make them available in Flyde by updating `flyde-nodes.json` with:
 
 ```bash
-pyflyde gen swlwi/rag.py
+pyflyde gen .
 ```
 
 Next, create a new `Index.flyde` visual flow with Flyde in VSCode. Wire the nodes together as shown in the diagram at the beginning of this section.
@@ -340,23 +351,21 @@ pyflyde Index.flyde
 
 This creates an SQLite database file in our index folder. We will use it in the next section to perform actual Retrieval Augmented Generation.
 
-### Potential improvements to the indexer
-
-As you may want to update your RAG database from time to time, our `Index.flyde` can be improved to support incremental indexing. We have implemented such an optimization in `Scrape.flyde` so that we don't scrape the issues that were scraped earlier. However, our vector database is populated from scratch every time we run `Index.flyde`.
-
-To avoid recreating the database from scratch or adding the same documents repeatedly, we can load the metadata from SQLite about the issues and articles that were indexed earlier and exclude those from the list returned by `ListArticles`. Alternatively, we can create a unique index in the `swlwi_embeddings` table and ignore items with the same path or hash upon adding them to the store.
-
 ## Retrieving documents into LLM's context
 
 Once we have populated the database with vectors of chunked documents, the actual retrieval of documents relevant to a search `query` and embedding of the search results into LLaMA's prompt is quite simple:
 
-{{< figure src="/img/post/pyflyde/rag.flyde.avif" alt="Rag.flyde" caption="Flow for Retrieval Augmentation of Ollama prompt" class="w60" >}}
+{{< figure src="/img/post/pyflyde/rag.flyde.webp" alt="Rag.flyde" caption="Flow for Retrieval Augmentation of Ollama prompt" class="w75" >}}
+
+Our `Rag.flyde` is different from `Index.flyde` and `Scrape.flyde` in that it is not designed as a standalone flow that you can just run with `pyflyde`. It is meant to be embedded in another flow or Python program. That's why you see `Query` as the flow input and `Response` as the flow output on the above diagram.
+
+This was intentional because we want to build the UI in a more conventional way and just embed `Rag.flyde` in that application. The next section shows how we can do it.
 
 ### Retriever component
 
 We provide the same path to the vector DB to the `Retriever` as an inline value. The `query` input comes from outside the flow, and the `response` output is used to send the results. There is no UI to get the query and display the results in this flow yet, because we are actually going to integrate it into an external Streamlit application in the next section.
 
-{{< figure src="/img/post/pyflyde/rag_retriever.avif" alt="Retriever component view in Flyde" class="w25" >}}
+{{< figure src="/img/post/pyflyde/rag_retriever.webp" alt="Retriever component view in Flyde" class="w25" >}}
 
 The Retriever implements the reader part of the vector store and reuses the same vector store logic for initialization. In addition, it uses LangChain's `as_retriever()` interface to perform the actual retrieval of matching documents.
 
@@ -366,8 +375,8 @@ class Retriever(Component):
 
     inputs = {
         "query": Input(description="Query text", type=str),
-        "path": Input(description="Path to the vector store",
-            type=str, mode=InputMode.STICKY, value="./index/vectors"),
+        "path": Input(description="Path to the vector store", type=str, mode=InputMode.STICKY,
+            value="./index/vectors"),
     }
 
     outputs = {"context": Output(description="Context retrieved from the vector store", type=str)}
@@ -376,28 +385,23 @@ class Retriever(Component):
         if not hasattr(self, "_embeddings"):
             self._embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
         if not hasattr(self, "_vector_store"):
+            logger.info(f"Opening vector store with path {path}/db.sqlite")
             self._vector_store = SQLiteVec(
-                table="swlwi_embeddings", connection=None,
-                db_file=f"{path}/db.sqlite3", embedding=self._embeddings
+                table="swlwi_embeddings", connection=None, db_file=f"{path}/db.sqlite3", embedding=self._embeddings
             )
         if not hasattr(self, "_retriever"):
-            # New stuff here: initializing as_retriever() interface to the vector store
             self._retriever = self._vector_store.as_retriever()
 
     def process(self, query: str, path: str) -> dict[str, str]:
-        # Initialize the store, embeddings, and retriever if needed
         self._init(path)
 
-        # Retrieve the documents matching the query
         docs = self._retriever.invoke(query)
 
         logger.info(f"Retrieved {len(docs)} documents from the vector store for query '{query}'")
-        print(f"Retrieved {len(docs)} documents from the vector store for query '{query}'")
 
         if not docs:
             return {"context": ""}
 
-        # Simply joining the documents as string
         context = "\n\n".join([doc.page_content for doc in docs])
         return {"context": context}
 ```
@@ -408,7 +412,7 @@ The `Retriever` retrieves documents (or chunks of articles, to be more precise) 
 
 Finally, let's look at our LLaMA wrapper component:
 
-{{< figure src="/img/post/pyflyde/rag_ollama_chat.avif" alt="OllamaChat component view in Flyde" class="w25" >}}
+{{< figure src="/img/post/pyflyde/rag_ollama_chat.webp" alt="OllamaChat component view in Flyde" class="w25" >}}
 
 This node receives the unmodified `query` and the `context` string from the `Retriever`. It then creates a prompt and sends it to a LLaMA chat to get a response.
 
@@ -430,26 +434,38 @@ class OllamaChat(Component):
         logger.info(f"Loaded context:\n\n {context}\n\n")
 
         # System prompt tells the agent about their role and sets ground rules
-        system_prompt = ("Given a question and context by user,"
-            "use the context and your prior knowledge to answer the user's question.")
+        system_prompt = """You are a helpful assistant that answers questions based on provided context. Follow these guidelines:
 
-        # Our user prompt
-        prompt = f"Question: {query}\n\nContext: {context}"
+1. PRIORITIZE the provided context over your general knowledge
+2. If the context contains relevant information, base your answer primarily on it
+3. If the context doesn't contain enough information to answer the question, use your general knowledge
+4. Give comprehensive and detailed answer to the original question
+5. If you refer to a source text, article, or author, mention the name of the source or omit it if you don't know
+6. Combine information from multiple sources when neccessary"""
+
+        # Our user prompt with structured format
+        prompt = f"""Context:
+{context}
+
+Question: {query}
+
+Please answer the question based primarily on the provided context"""
 
         # Invoke the model
         response = ollama.chat(
-            model="llama3.2", # Replace this with other model string if needed, e.g. "phi4"
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": prompt}
-            ],
+            model="llama3.2",  # Replace this with other model string if needed, e.g. "phi4"
+            messages=[{"role": "system", "content": system_prompt}, {"role": "user", "content": prompt}],
         )
         return {"response": response["message"]["content"]}
 ```
 
-Our `Rag.flyde` is different from `Index.flyde` and `Scrape.flyde` in that it is not designed as a standalone flow that you can just run with `pyflyde`. It is meant to be embedded in another flow or Python program.
+As you can see, we have used some prompt optimization techniques to achieve better results for our RAG:
 
-This was intentional because we want to build the UI in a more conventional way and just embed `Rag.flyde` in that application. The next section shows how we can do it.
+1. Provided clear instructions on RAG context vs. general knowledge in the system prompt
+2. Instructed the agent on how to frame the response
+3. Combined the context with the user query in the user prompt
+
+The resulting prompt will make our RAG system more reliable and help LLaMA 3.2 provide more accurate, context-grounded responses while being transparent about the limitations of the provided context.
 
 ### Using other Chat APIs, e.g., OpenAI
 
@@ -463,6 +479,8 @@ export OPENAI_API_KEY="your-api-key"
 ```
 
 Next, implement the `OpenAIChat` component with the same inputs and outputs schema as `OllamaChat` we implemented before:
+
+{{< figure src="/img/post/pyflyde/rag_openai_chat.webp" alt="OpenAIChat component view in Flyde" class="w25" >}}
 
 ```python
 from langchain_openai import ChatOpenAI # Add this to imports
@@ -489,25 +507,42 @@ class OpenAIChat(Component):
         self._init()
 
         # Construct the prompts
-        system_prompt = "Given a question and context by user, use the context and your prior knowledge to answer the user's question."
-        prompt = f"Question: {query}\n\nContext: {context}"
+        system_prompt = """You are a helpful assistant that answers questions based on provided context. Follow these guidelines:
+
+1. PRIORITIZE the provided context over your general knowledge
+2. If the context contains relevant information, base your answer primarily on it
+3. If the context doesn't contain enough information to answer the question, use your general knowledge
+4. Give comprehensive and detailed answer to the original question
+5. If you refer to a source text, article, or author, mention the name of the source or omit it if you don't know
+6. Combine information from multiple sources when neccessary"""
+
+        prompt = f"""Context:
+{context}
+
+Question: {query}
+
+Please answer the question based primarily on the provided context"""
 
         # Invoke the model
         response = self._llm.invoke([("system", system_prompt), ("human", prompt)])
 
-        return {"response": response.content}
+        return {"response": response.content}  # type: ignore
 ```
 
 Looks very similar to how we work with Ollama, but the prompt and response structure is a bit different. We also used the `_init()` method to avoid reinitializing the model on every input.
 
 > **Note:** If you get `openai.RateLimitError: Error code: 429` when using this component, it most likely means your OpenAI credit balance is zero.
 
+The resulting flow will also be almost the same as the Ollama flow above, just replacing the Chat node:
+
+{{< figure src="/img/post/pyflyde/rag_openai.flyde.webp" alt="Rag_OpenAI.flyde" caption="Flow for Retrieval Augmentation of OpenAI Chat prompt" class="w75" >}}
+
 ### Putting it all together
 
-Now that we have our components implemented in `rag.py`, it's time to update the TypeScript stubs and create a new visual flow in Flyde:
+Now that we have our components implemented in `rag.py`, it's time to update the `flyde-nodes.json` and create a new visual flow in Flyde:
 
 ```bash
-pyflyde gen swlwi/rag.py
+pyflyde gen .
 ```
 
 Then invoke the `Flyde: New Visual Flow` command in VSCode and create the `Rag.flyde` flow as shown in the diagram above.
@@ -521,18 +556,45 @@ In case you are not familiar with Streamlit, it is a simple web-based UI library
 This might sound complicated and unusual, but in practice, it can be simpler than conventional UI toolkits. Let's have a look at our Streamlit `app.py`:
 
 ```python
-"""Streamlit app for the UI to query the RAG."""
+"""Streamlit app for the UI to query the RAG with chat interface"""
 
+import logging
+import sys
+import time
 from dataclasses import dataclass
-import os
-import signal
+from queue import Empty, Queue
+
 import streamlit as st
-from queue import Queue
+import torch
 from flyde.flow import Flow
 from flyde.io import EOF
 
+# =============================================================================
+# CONFIGURATION & SETUP
+# =============================================================================
 
-# A structure to hold our appication's state
+# Configure logging to show in console (avoid duplicates)
+if not logging.getLogger().handlers:
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+        stream=sys.stdout,
+    )
+else:
+    # If already configured, just set the level
+    logging.getLogger().setLevel(logging.INFO)
+
+# Fix streamlit torch classes path warning
+torch.classes.__path__ = []  # type: ignore
+
+# Page config
+st.set_page_config(page_title="SWLWI Knowledge Base", page_icon="🚀", layout="wide")
+
+# =============================================================================
+# CORE APPLICATION LOGIC
+# =============================================================================
+
+
 @dataclass
 class FlowWrapper:
     flow: Flow
@@ -540,60 +602,238 @@ class FlowWrapper:
     response: Queue
 
 
-# Cache resource is a way to keep state between re-renders in Streamlit.
-# wrap_flow() is effectively called just once in our app.
 @st.cache_resource
 def wrap_flow() -> FlowWrapper:
-    # Load a PyFlyde flow from a .flyde file
-    flow = Flow.from_file("Rag.flyde")
-
-    # Get the query queue from the flow object
-    query_q = flow.node.inputs["query"].queue
-    # Attach a new queue to the flow's output
-    response_q: Queue = Queue()
-    flow.node.outputs["response"].connect(response_q)
-
-    # Run the flow (in a separate thread)
-    flow.run()
-
-    return FlowWrapper(flow, query_q, response_q)
-
-
-# UI header
-st.title("Software Leads Weekly Index KB")
-st.caption("A collection of articles, papers, and other resources for software leads.")
-st.markdown("---")
-
-
-f = wrap_flow()
-
-query = st.text_input("Ask a question or type /bye to finish the conversation", "")
-if query:
-    if query.strip() == "/bye":
-        query = EOF
-    f.query.put(query)
-    response = f.response.get()
-    if response == EOF:
-        st.write("Goodbye!")
+    """Load and initialize the RAG flow with error handling."""
+    try:
+        with st.spinner("🚀 Loading knowledge base..."):
+            flow = Flow.from_file("Rag.flyde")
+            query_q = flow.node.inputs["query"].queue
+            response_q: Queue = Queue()
+            flow.node.outputs["response"].connect(response_q)
+            flow.run()
+            return FlowWrapper(flow, query_q, response_q)
+    except Exception as e:
+        st.error(f"❌ Failed to load knowledge base: {str(e)}")
         st.stop()
-        os.kill(os.getpid(), signal.SIGKILL)
-    else:
-        st.write(response)
+
+
+def get_response_with_timeout(response_queue: Queue, timeout: int = 120) -> str:
+    """Get response from queue with timeout handling."""
+    logging.info(f"Waiting for response with {timeout}s timeout...")
+    try:
+        response = response_queue.get(timeout=timeout)
+        logging.info("Response received successfully")
+        return response
+    except Empty:
+        logging.warning(f"Request timed out after {timeout} seconds")
+        return "⚠️ Request timed out. Please try again with a shorter question or check if the model is running."
+
+
+def show_typing_indicator(placeholder):
+    """Show animated typing indicator."""
+    for i in range(3):
+        placeholder.markdown("🤔 Assistant is thinking" + "." * (i + 1))
+        time.sleep(0.3)
+
+
+def handle_exit_command():
+    """Handle graceful exit when user types /bye."""
+    with st.chat_message("assistant", avatar="🤖"):
+        st.markdown("👋 **Goodbye! Thanks for using SWLWI Knowledge Base!**")
+    try:
+        st.session_state.flow_wrapper.query.put(EOF)
+    except Exception:
+        pass
+    st.balloons()
+    time.sleep(2)
+    st.stop()
+
+
+def process_user_query(prompt: str, flow_wrapper: FlowWrapper) -> str:
+    """Process user query and return response."""
+    logging.info(f"Sending query: {prompt[:50]}...")
+    flow_wrapper.query.put(prompt)
+    response = get_response_with_timeout(flow_wrapper.response)
+
+    if response == EOF:
+        st.markdown("👋 **Goodbye! Thanks for using SWLWI Knowledge Base!**")
+        st.balloons()
+        st.stop()
+
+    return response
+
+
+def initialize_session_state():
+    """Initialize session state variables."""
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
+    if "flow_wrapper" not in st.session_state:
+        st.session_state.flow_wrapper = wrap_flow()
+
+
+def display_welcome_message():
+    """Display welcome message for new users."""
+    if not st.session_state.messages:
+        with st.chat_message("assistant", avatar="🤖"):
+            st.markdown("""
+            👋 **Welcome to the Software Leads Weekly Index Knowledge Base!**
+
+            I'm here to help you with questions about:
+            - 🎯 Software leadership and management
+            - 🔧 Technical best practices
+            - 👥 Team building and culture
+            - 📈 Industry insights and trends
+
+            **Try asking me anything about software leadership!**
+            """)
+
+
+def display_chat_history():
+    """Display all messages in chat history."""
+    for message in st.session_state.messages:
+        avatar = "👤" if message["role"] == "user" else "🤖"
+        with st.chat_message(message["role"], avatar=avatar):
+            st.markdown(message["content"])
+
+
+def process_chat_input():
+    """Handle new chat input from user."""
+    if prompt := st.chat_input("Ask me anything about software leadership... (type '/bye' to exit)", key="chat_input"):
+        # Handle exit command
+        if prompt.strip().lower() in ["/bye", "bye", "exit", "quit"]:
+            handle_exit_command()
+
+        # Add user message
+        st.session_state.messages.append({"role": "user", "content": prompt})
+
+        # Display user message
+        with st.chat_message("user", avatar="👤"):
+            st.markdown(prompt)
+
+        # Get and display response
+        with st.chat_message("assistant", avatar="🤖"):
+            # Show typing indicator
+            typing_placeholder = st.empty()
+            show_typing_indicator(typing_placeholder)
+            typing_placeholder.empty()
+
+            # Process response
+            with st.spinner("Processing your question... (This may take up to 2 minutes for the first question)"):
+                try:
+                    response = process_user_query(prompt, st.session_state.flow_wrapper)
+                    st.markdown(response)
+                except Exception as e:
+                    response = f"❌ Sorry, I encountered an error: {str(e)}"
+                    st.markdown(response)
+
+        # Add assistant response to history
+        st.session_state.messages.append({"role": "assistant", "content": response})
+
+
+# =============================================================================
+# VISUAL STYLING & DECORATIONS
+# =============================================================================
+
+
+def apply_custom_styles():
+    """Apply custom CSS styling to the app."""
+    st.markdown(
+        """
+    <style>
+    .main-header {
+        text-align: center;
+        padding: 1rem 0 2rem 0;
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 10px;
+        margin-bottom: 2rem;
+    }
+    .stChatMessage {
+        padding: 1rem;
+        border-radius: 10px;
+        margin: 0.5rem 0;
+    }
+    .example-btn {
+        margin: 0.2rem 0;
+    }
+    </style>
+    """,
+        unsafe_allow_html=True,
+    )
+
+
+def display_header():
+    """Display the main header with styling."""
+    st.markdown(
+        """
+    <div class="main-header">
+        <h1>🚀 Software Leads Weekly Index KB</h1>
+        <p style="font-size: 1.2em; margin: 0;">Your AI assistant for software leadership insights</p>
+    </div>
+    """,
+        unsafe_allow_html=True,
+    )
+
+
+def display_footer():
+    """Display footer with helpful tips."""
+    st.markdown("---")
+    st.markdown(
+        "<div style='text-align: center; color: #666; padding: 1rem;'>"
+        "💡 <strong>Tip:</strong> Try asking specific questions about software leadership, "
+        "team management, or technical best practices for the best results!"
+        "</div>",
+        unsafe_allow_html=True,
+    )
+
+
+# =============================================================================
+# MAIN APPLICATION FLOW
+# =============================================================================
+
+
+def main():
+    """Main application entry point."""
+    # Apply visual styling
+    apply_custom_styles()
+    display_header()
+
+    # Initialize core app state
+    initialize_session_state()
+
+    # Display chat interface
+    display_welcome_message()
+    display_chat_history()
+
+    # Handle user input
+    process_chat_input()
+
+    # Display footer
+    display_footer()
+
+
+# Run the app
+if __name__ == "__main__":
+    main()
+else:
+    # When imported or run by streamlit
+    main()
 ```
 
-First, we define a data class (structure) that will hold the state of our application. It consists of a PyFlyde Flow and two queues to send the query input and receive the response output from that flow.
+The `main()` function serves as our Streamlit application's entry point and orchestrates the entire chat interface:
 
-Then we use Streamlit's `st.cache_resource` decorator. This makes Streamlit remember the return value of the decorated function during subsequent calls. So, our `wrap_flow()` function is only called once, and subsequent calls return the same dataclass instance.
+1. **Visual Setup**: First, it applies custom CSS styling and displays the header section
+2. **State Initialization**: It initializes Streamlit's session state, including the message history and the flow wrapper (which contains our PyFlyde RAG flow)
+3. **UI Components**: It displays the welcome message and chat history from previous interactions
+4. **Input Processing**: It handles new user input through the `process_chat_input()` function
+5. **Footer Display**: Finally, it shows the footer section
 
-After that, we initialize the header part of the UI and call `wrap_flow` to retrieve the state. Then we create a text field to receive the user's query.
+The `FlowWrapper` data class holds our application state - it contains the PyFlyde Flow and two queues for communication. The `wrap_flow()` function uses Streamlit's `st.cache_resource` decorator, ensuring the RAG flow is loaded only once and reused across sessions.
 
-Note that we use `if query` rather than a typical `while` loop. This is because the loop happens outside of our `app.py`; Streamlit calls our `app.py` every time the UI needs to be refreshed. That's why we just check if the query is non-empty and react to its value.
+The chat input handling supports special commands like `/bye` to gracefully exit the application. For regular queries, it triggers the RAG pipeline to retrieve relevant documents, augment the context, and generate responses using the LLM.
 
-Our script supports the `/bye` command to terminate the dialog. In this case, it sends an `EOF` input to the PyFlyde flow, which shuts it down gracefully.
-
-Any other text input is considered a query and triggers our `Rag.flyde` flow from the previous section to retrieve, augment, and generate a response.
-
-> **Known caveat:** Streamlit suppresses the logs in our PyFlyde code that we do with the standard Python logger interface. You may need to use good old `print()` to debug and see actual messages when running with Streamlit.
+Note that Streamlit automatically re-runs the entire script on each user interaction, which is why we use session state to maintain conversation history and cached resources to avoid reloading the flow.
 
 To run the application, invoke:
 
@@ -603,13 +843,13 @@ streamlit run app.py
 
 Here is how the UI of our application looks in action in a browser window:
 
-{{< figure src="/img/post/pyflyde/streamlit_app_example.avif" alt="Streamlit App UI" class="w60" >}}
+{{< figure src="/img/post/pyflyde/streamlit_app_example.webp" alt="Streamlit App UI" class="w100" caption="UI of our knowledge base app">}}
 
 When finished chatting, type `/bye` to shut down our PyFlyde flow gracefully, and hit `Ctrl + C` to close the Streamlit app in the terminal.
 
 ## Conclusion
 
-In this tutorial, we embarked on an exciting journey to create an interactive knowledge base with an LLM-powered chat interface. From scraping thematic blog posts to building a search index, integrating Retrieval Augmented Generation, and wrapping it all up in a user-friendly UI, we've covered a wide range of practical applications.
+In this tutorial, we have gone through an exciting journey to create an interactive knowledge base with an LLM-powered chat interface. From scraping thematic blog posts to building a search index, integrating Retrieval Augmented Generation, and wrapping it all up in a user-friendly UI, we've covered a wide range of practical applications.
 
 ### Key takeaways
 
@@ -643,15 +883,15 @@ Here's a recap of the valuable lessons we've learned:
 
 Flow-based programming offers a unique approach to Data and AI Engineering. It aligns perfectly with the flow-based nature of data pipelines, providing a powerful tool for designing, structuring, and visualizing applications. This approach simplifies onboarding, enhances collaboration, and makes the development process more enjoyable.
 
-However, it's important to acknowledge that tools like Flyde and PyFlyde are still in their early stages. While they are excellent for learning, prototyping, and small to medium-sized projects, they may not yet be suitable for large-scale or corporate environments due to potential bugs and stability issues.
+However, it's important to acknowledge that tools like Flyde and PyFlyde are still in their early stages. While they are excellent for learning, prototyping, and small to medium-sized projects, they may not yet be suitable for large-scale or corporate environments due to potential bugs and stability issues. As the time goes by and more people battle test them, eventually these tools may become the mainstream, given how naturally they fit into the agentic development workflow.
 
 #### Embracing AI Coding Assistants
 
-One of the standout benefits of this paradigm is its compatibility with AI coding assistants. By defining clear data flows and interfaces, AI assistants like Copilot can efficiently generate implementation code, making the development process smoother and more efficient. In fact, this is how this project built: I took more of an architect's seat defining the flows and the interfaces of the black boxes, and Copilot wrote most of the implementation code.
+One of the standout benefits of this paradigm is its compatibility with AI coding assistants. By defining clear data flows and interfaces, AI assistants like Copilot and Claude can efficiently generate implementation code, making the development process smoother and more efficient. In fact, this is how this project built: I took more of an architect's seat defining the flows and the interfaces of the black boxes, and the AI agents wrote most of the implementation code.
 
 #### Next Steps
 
-Now that you have Flyde and PyFlyde in your toolkit, your journey begins. Whether you're building innovative prototypes, exploring new AI applications, or enhancing existing workflows, these tools help you to bring your ideas to life.
+Now that you have Flyde and PyFlyde in your toolkit, your own journey begins. Whether you're building innovative prototypes, exploring new AI applications, or enhancing existing workflows, these tools help you to bring your ideas to life.
 
 If you're eager to dive deeper and explore more tools, here are some useful links:
 
@@ -659,5 +899,6 @@ If you're eager to dive deeper and explore more tools, here are some useful link
 - [PyFlyde](https://github.com/trustmaster/pyflyde)
 - [Flow-Based Programming Wiki](https://github.com/flowbased/flow-based.org/wiki)
 - [KNIME](https://www.knime.com/) - enterprise-level visual data engineering workflows
+- [Langflow](https://www.langflow.org/) - LLM-focused visual IDE
 
-Thank you for joining me on this journey. I hope this tutorial has inspired you to embrace the power of visual AI engineering and flow-based programming. Now, go forth and create something amazing!
+Thank you for joining me on this journey. I hope this tutorial has inspired you to embrace the power of visual AI engineering and Flow-based Programming. Now, go ahead and create something amazing!
