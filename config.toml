@@ -25,7 +25,7 @@ DateForm = "Jan 2, 2006"
 Description = "Vladimir Sibirov on building software systems and engineering teams"
 Author = "Vladimir Sibirov"
 postSummariesFrontPage = 6                                                          #Number of post summaries to show on front page, comment out to allow default(4)
-showReadTime = true                                                                 #set to false to exclude read time from header of post
+showReadTime = false                                                                 #set to false to exclude read time from header of post
 header_image = "img/home-bg.jpg"
 
 # Sidebar settings

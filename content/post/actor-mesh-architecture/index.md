@@ -2,7 +2,7 @@
 title:       "Actor Mesh: Enterprise Architecture for Scalable AI Engineering"
 subtitle:    "Building Adaptive, Heterogeneous AI Systems with Decentralized Orchestration"
 description: "A practical guide to designing resilient AI systems using Actor Model and distributed sagas, enabling dynamic workflows, independent scaling, and cost-effective operations"
-date:        2026-01-01
+date:        2026-01-04
 tags:        ["architecture", "ai", "data", "fbp"]
 categories:  ["Engineering", "Flow-Based Programming"]
 image:       "/img/post/actor-mesh/article-header5.webp"
