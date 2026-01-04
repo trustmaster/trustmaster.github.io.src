@@ -193,7 +193,7 @@ But how does it know what to do and in which sequence? And how can you be sure t
 Traditional distributed systems often rely on a central orchestrator to coordinate complex workflows across multiple services. Choreography-based sagas [[GARCIA87](#references), [RICHARDSON18](#references)] invert this model by distributing coordination logic among the participating actors themselves. Each actor knows when to act, whom to notify, and how to handle both success and failure scenarios, resulting in a self-organizing distributed workflow.
 
 {{<figure
-    src="/post/actor-mesh-ai-engineering/choreography-saga.svg"
+    src="/post/actor-mesh-architecture/choreography-saga.svg"
     link="./choreography-saga.svg"
     alt="An example mesh to handle a choreography saga"
     caption="An example mesh to handle a choreography saga. Click to open full size"
@@ -381,7 +381,7 @@ For example, consider an order processing pipeline where each `Order` contains o
 ##### Option 1. Passing objects separately
 
 {{<figure
-    src="/post/actor-mesh-ai-engineering/monotonic-example1.svg"
+    src="/post/actor-mesh-architecture/monotonic-example1.svg"
     link="./monotonic-example1.svg"
     alt="Order processing example in Map-Reduce style"
     caption="Option 1. Order processing in Map-Reduce style"
@@ -394,7 +394,7 @@ While this system may work well with a small amount of orders, optimizing it for
 ##### Option 2. Monotonic processing at line item level
 
 {{<figure
-    src="/post/actor-mesh-ai-engineering/monotonic-example2.svg"
+    src="/post/actor-mesh-architecture/monotonic-example2.svg"
     link="./monotonic-example2.svg"
     alt="Order processing example with item-level monotonicity"
     caption="Option 2. Order processing example with item-level monotonicity"
@@ -407,7 +407,7 @@ We have improved the throughput and reduced the amount of coordination needed co
 ##### Option 3. Monotonic processing end-to-end at order level
 
 {{<figure
-    src="/post/actor-mesh-ai-engineering/monotonic-example3.svg"
+    src="/post/actor-mesh-architecture/monotonic-example3.svg"
     link="./monotonic-example3.svg"
     alt="Order processing example with order-level monotonicity"
     caption="Option 3. Order processing example with order-level monotonicity"
@@ -471,7 +471,7 @@ At a high level, your Actor Mesh served on Kubernetes follows this structure:
 Here is a visual representation:
 
 {{<figure
-    src="/post/actor-mesh-ai-engineering/kubernetes-deployment.svg"
+    src="/post/actor-mesh-architecture/kubernetes-deployment.svg"
     link="./kubernetes-deployment.svg"
     alt="Actors being deployed on Kubernetes"
     caption="Actors of two types (CPU and GPU) deployed in a Kubernetes cluster"
@@ -536,7 +536,7 @@ Observability for an actor mesh typically consists of three building blocks:
 - Visualization, dashboards and alerting
 
 {{<figure
-    src="/post/actor-mesh-ai-engineering/observability-example.svg"
+    src="/post/actor-mesh-architecture/observability-example.svg"
     link="./observability-example.svg"
     alt="Observability building blocks for an actor mesh system"
     caption="Example observability building blocks for an actor mesh system"
@@ -577,7 +577,7 @@ The concepts above are easier to understand with a practical example. We've crea
 ### Architecture
 
 {{<figure
-    src="/post/actor-mesh-ai-engineering/ecommerce-support-app.svg"
+    src="/post/actor-mesh-architecture/ecommerce-support-app.svg"
     link="./ecommerce-support-app.svg"
     alt="E-commerce Support Agent App example"
     caption="E-commerce Support Agent App example"
@@ -632,7 +632,7 @@ From a software architecture perspective, an Actor Mesh application is a distrib
 Consider this example:
 
 {{<figure
-    src="/post/actor-mesh-ai-engineering/message-schemas-problem.svg"
+    src="/post/actor-mesh-architecture/message-schemas-problem.svg"
     link="./message-schemas-problem.svg"
     alt="An example of message schemas incompatibility problem"
     caption="An example of message schemas incompatibility problem"
