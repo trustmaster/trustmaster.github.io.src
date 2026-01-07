@@ -26,9 +26,9 @@ The architecture shines in scenarios where you face several interrelated challen
 
 These aren't theoretical concerns. We encountered all of them while building an intelligent image processing system at [Delivery Hero](https://deliveryhero.jobs/): a platform that had to seamlessly blend generative AI, computer vision, expert decision-making, and conventional business services. By applying the Actor Mesh patterns described in this article, we built a system capable of processing hundreds of thousands of media files daily on a lean Kubernetes cluster (roughly 100 pods), maintaining both high reliability and remarkably low operational costs.
 
-This is where my decades-long interest in distributed systems and experience in building high-throughput streaming application came handy. Kudos to the team who dared to leave the beaten track of REST APIs and DAGs and harnessed the power of asynchronous actors in practice: [Artem Yushkovskiy](https://www.linkedin.com/in/atemate/), [Omar Ghetti](https://www.linkedin.com/in/omarghetti/) and [Sonia Veselova](https://www.linkedin.com/in/sonia-veselova-8206b9192/).
+This is where my long-term interest in distributed systems and experience in building high-throughput streaming application came handy. Kudos to the team who dared to leave the beaten track of HTTP APIs and DAGs and harnessed the power of asynchronous actors in practice: [Artem Yushkovskiy](https://www.linkedin.com/in/atemate/), [Omar Ghetti](https://www.linkedin.com/in/omarghetti/) and [Sonia Veselova](https://www.linkedin.com/in/sonia-veselova-8206b9192/).
 
-The guide starts with the base building blocks, considers several typical approaches as the systems evolve, and then keeps adding more patterns and techniques that help the teams address the challenges as they emerge. Then it is completed with some practical examples, tips & tricks, and off-the-shelf implementations.
+The guide starts with the base building blocks, considers several typical approaches as the systems evolve, and then keeps adding more patterns and techniques that help the teams address the challenges as they emerge. Then it is completed with some practical examples, tips & tricks, and off-the-shelf frameworks.
 
 ## Actor Model - core paradigm
 
